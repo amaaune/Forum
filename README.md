@@ -130,7 +130,7 @@ Chaque page HTML charge ses feuilles de style dans cet ordre :
 - JS (animations uniquement)
 
 ---
-
+<!-- 
 ## Lancer le projet
 
 ### En local
@@ -142,4 +142,4 @@ go run main.go
 ```bash
 docker build -t forum .
 docker run -p 8080:8080 forum
-```
+``` -->
