@@ -43,7 +43,7 @@ forum/
 │   └── validate.go          # Contrôle email, doublons, inputs vides
 
 ├── templates/               # Fichiers HTML rendus côté serveur par Go
-│   ├── partials/            # Morceaux HTML réutilisés sur toutes les pages
+│   ├── poly/                # Composants HTML réutilisés sur plusieurs pages
 │   │   ├── header.html
 │   │   └── footer.html
 │   ├── index.html           # Accueil + fil de posts
