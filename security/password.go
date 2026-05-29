@@ -23,5 +23,3 @@ func checkPassword(testpassword, truepassword string) bool {
 		return false
 	}
 }
-
-// ajouter "golang.org/x/crypto/bcrypt" dans le go.mod
