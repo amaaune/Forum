@@ -2,6 +2,7 @@ package main
 
 import (
 	"forum/database"
+	"forum/middleware"
 	"html/template"
 	"log"
 	"net/http"
@@ -40,6 +41,11 @@ func register(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "register.html")
 }
 
+func logoutHandler(w http.ResponseWriter, r *http.Request) {
+    middleware.DeleteSession(w)                      	
+    http.Redirect(w, r, "/login", http.StatusSeeOther) 	
+}
+
 func main() {
 	database.InitDB()
 	defer database.DB.Close()
@@ -55,7 +61,20 @@ func main() {
 	http.HandleFunc("/error", errorP)
 	http.HandleFunc("/post", post)
 	http.HandleFunc("/register", register)
+	http.HandleFunc("/category", middleware.RequireAuth(
+        func(w http.ResponseWriter, r *http.Request) {
+            renderTemplate(w, "category.html")
+        },
+    ))
+    http.HandleFunc("/post", middleware.RequireAuth(
+        func(w http.ResponseWriter, r *http.Request) {
+            renderTemplate(w, "post.html")
+        },
+    ))
+	http.HandleFunc("/logout", logoutHandler)
 
+    log.Println("Serveur lancé sur http://localhost:8080")
+    log.Fatal(http.ListenAndServe(":8080", nil))
 	log.Println("Serveur lancé sur http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
