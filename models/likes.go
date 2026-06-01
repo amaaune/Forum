@@ -2,10 +2,10 @@ package models
 
 import "time"
 
-type Comment struct {
-	CommentID int
+type Like struct {
+	Type      string
 	Post      int
 	User      int
-	Content   string
+	Comment   int
 	CreatedAt time.Time
 }
