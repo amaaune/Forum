@@ -2,6 +2,7 @@ package security
 
 import (
     "net/http"
+    "time"
     "github.com/gofrs/uuid/v5"
 )
 
@@ -24,6 +25,9 @@ func storeUUID(w http.ResponseWriter) (string, error) {
         Value:    sessionID,
         HttpOnly: true,
         Secure:   true,
+        Path:     "/",             
+        Expires:  time.Now().Add(7 * 24 * time.Hour), 
+        SameSite: http.SameSiteLaxMode,
     })
 
     return sessionID, nil
