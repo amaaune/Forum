@@ -57,9 +57,7 @@ func main() {
 		renderTemplate(w, "index.html")
 	})
 	http.HandleFunc("/login", login)
-	http.HandleFunc("/category", category)
 	http.HandleFunc("/error", errorP)
-	http.HandleFunc("/post", post)
 	http.HandleFunc("/register", register)
 	http.HandleFunc("/category", middleware.RequireAuth(
         func(w http.ResponseWriter, r *http.Request) {

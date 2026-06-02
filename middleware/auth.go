@@ -12,7 +12,7 @@ func RequireAuth(next http.HandlerFunc) http.HandlerFunc {
             http.Redirect(w, r, "/login", http.StatusSeeOther)
             return
         }
-        if !security.ValidateUUID(cookie.Value) {
+        if !security.IsValidUsername(cookie.Value) {
             DeleteSession(w)
             http.Redirect(w, r, "/login", http.StatusSeeOther)
             return

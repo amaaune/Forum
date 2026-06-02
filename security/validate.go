@@ -2,13 +2,13 @@ package security
 
 import "strings"
 
-func IsValidUsername(username string) bool {  (- . " ")
+func IsValidUsername(username string) bool {
 	var specialChars = "-_"
 	if len(username) < 3 || len(username) > 20 {
 		return false
 	}
 	for i := 0; i < len(username); i++ {
-		if (username[i] >= 'A' && username[i] <= 'Z') || (username[i] >= 'a' && username[i] <= 'z') || (username[i] >= '0' && username[i] <= '9') || strings.ContainsRune(specialChars, username[i]) {
+		if (username[i] >= 'A' && username[i] <= 'Z') || (username[i] >= 'a' && username[i] <= 'z') || (username[i] >= '0' && username[i] <= '9') || strings.ContainsRune(specialChars, rune(username[i])) {
 			continue
 		} else {
 			return false
@@ -42,7 +42,7 @@ func IsValidPassword(password string) bool {
 			hasLower = true
 		} else if password[i] >= '0' && password[i] <= '9' {
 			hasDigit = true
-		} else if strings.ContainsRune(specialChars, password[i]) {
+		} else if strings.ContainsRune(specialChars, rune(password[i])) {
 			hasSpecial = true
 		}
 	}

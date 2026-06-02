@@ -1,5 +1,10 @@
 package security
 
+import (
+    "html/template"
+    "net/http"
+)
+
 func RenderError(w http.ResponseWriter, code int, message string) {
 
     title := "Erreur"
@@ -17,15 +22,17 @@ func RenderError(w http.ResponseWriter, code int, message string) {
     case http.StatusUnauthorized:       
         title = "Non autorisé"	 	// error 401
     }
+	
+	data := struct {
+		Code    int
+		Title   string
+		Message string
+	}{
+		Code:    code,
+		Title:   title,
+		Message: message,
+	}
 
-   
-    data := ErrorData{
-        Code:    code,
-        Title:   title,
-        Message: message,
-    }
-
-    
     t, err := template.ParseFiles("templates/error.html")
     if err != nil {
         
