@@ -42,6 +42,8 @@ func CreateTables() {
 		comment_id INTEGER PRIMARY KEY AUTOINCREMENT,
 		post INTEGER,
 		user INTEGER,
+		content TEXT,
+		created_at DATETIME,
 		FOREIGN KEY (post) REFERENCES posts (post_id),
 		FOREIGN KEY (user) REFERENCES users (user_id)
 	);
@@ -50,6 +52,7 @@ func CreateTables() {
 		post INTEGER,
 		user INTEGER,
 		comment INTEGER,
+		created_at DATETIME,
 		FOREIGN KEY (post) REFERENCES posts (post_id),
 		FOREIGN KEY (user) REFERENCES users (user_id),
 		FOREIGN KEY (comment) REFERENCES comments (comment_id)
