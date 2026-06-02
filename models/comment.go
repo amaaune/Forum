@@ -8,4 +8,5 @@ type Comment struct {
 	User      int
 	Content   string
 	CreatedAt time.Time
+	Score     int
 }
