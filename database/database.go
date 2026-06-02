@@ -16,6 +16,12 @@ func InitDB() {
 	if err != nil {
 		log.Fatal("unable to use data source name", err)
 	}
+
+	_, err = DB.Exec("PRAGMA foreign_keys = ON;")
+	if err != nil {
+		log.Fatal("Impossible d'activer les foreign keys : ", err)
+	}
+
 	err = DB.Ping()
 	if err != nil {
 		log.Fatal("Impossible de Joindre la DB")
@@ -53,9 +59,10 @@ func CreateTables() {
 		user INTEGER,
 		comment INTEGER,
 		created_at DATETIME,
-		FOREIGN KEY (post) REFERENCES posts (post_id),
-		FOREIGN KEY (user) REFERENCES users (user_id),
-		FOREIGN KEY (comment) REFERENCES comments (comment_id)
+		FOREIGN KEY (post) REFERENCES posts (post_id) ON DELETE CASCADE,
+		FOREIGN KEY (user) REFERENCES users (user_id) ON DELETE CASCADE,
+		FOREIGN KEY (comment) REFERENCES comments (comment_id) ON DELETE CASCADE,
+		UNIQUE (post, user, comment)
 	);
 	CREATE TABLE IF NOT EXISTS categories (
 		categorie_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -64,8 +71,8 @@ func CreateTables() {
 	CREATE TABLE IF NOT EXISTS post_categories (
 		post_id INTEGER,
 		categorie_id INTEGER,
-		FOREIGN KEY (post_id) REFERENCES posts (post_id),
-		FOREIGN KEY (categorie_id) REFERENCES categories (categorie_id)
+		FOREIGN KEY (post_id) REFERENCES posts (post_id) ON DELETE CASCADE,
+		FOREIGN KEY (categorie_id) REFERENCES categories (categorie_id) ON DELETE CASCADE
 	);
 	`
 	_, err := DB.Exec(query)
