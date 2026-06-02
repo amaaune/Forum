@@ -48,7 +48,7 @@ func CreateTables() {
 		FOREIGN KEY (user) REFERENCES users (user_id)
 	);
 	CREATE TABLE IF NOT EXISTS likes (
-		type TEXT,
+		count int,
 		post INTEGER,
 		user INTEGER,
 		comment INTEGER,
