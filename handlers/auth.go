@@ -39,8 +39,6 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
-
-	///// Récupérer l'utilisateur depuis la base de données /////
 	user, err := database.GetUserByEmail(req.Email)
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
@@ -51,8 +49,6 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
-
-	///// Vérifier le mot de passe /////
 	if !security.CheckPassword(req.Password, user.Password) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusUnauthorized)
@@ -62,8 +58,6 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
-
-	///// Succès //////
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(LoginResponse{
