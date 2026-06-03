@@ -8,4 +8,5 @@ type Post struct {
 	Title     string
 	Content   string
 	CreatedAt time.Time
+	Score     int
 }

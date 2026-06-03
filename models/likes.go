@@ -3,7 +3,7 @@ package models
 import "time"
 
 type Like struct {
-	Type      string
+	Count     int
 	Post      int
 	User      int
 	Comment   int

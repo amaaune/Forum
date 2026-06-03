@@ -64,24 +64,15 @@ func GetPost(postID int) (models.Post, error) {
 
 func CreatePost(user int, title string, content string) error {
 	_, err := database.DB.Exec("INSERT INTO posts (user, title, content) VALUES (?, ?, ?)", user, title, content)
-	if err != nil {
-		return err
-	}
-	return nil
+	return err
 }
 
 func DeletePost(postID int) error {
 	_, err := database.DB.Exec("DELETE FROM posts WHERE post_id = ?", postID)
-	if err != nil {
-		return err
-	}
-	return nil
+	return err
 }
 
 func UpdatePost(postID int, title string, content string) error {
 	_, err := database.DB.Exec("UPDATE posts SET title = ?, content = ? WHERE post_id = ?", title, content, postID)
-	if err != nil {
-		return err
-	}
-	return nil
+	return err
 }
