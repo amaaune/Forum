@@ -15,6 +15,7 @@ type LoginRequest struct {
 type LoginResponse struct {
 	Success bool        `json:"success"`
 	Message string      `json:"message"`
+	SessionID string    `json:"session_id,omitempty"`
 	UserID  int         `json:"user_id,omitempty"`
 	Username string     `json:"username,omitempty"`
 }
@@ -60,10 +61,19 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
+	SessionID, err := security.StoreUUID(w)
+	if err != nil {
+		json.NewEncoder(w).Encode(LoginResponse{
+			Success: false,
+			Message: "Erreur lors de la création de la session",
+		})
+		return
+	}
 	json.NewEncoder(w).Encode(LoginResponse{
 		Success:  true,
 		Message:  "Connexion réussie",
 		UserID:   user.UserID,
 		Username: user.Username,
+		SessionID: SessionID,
 	})
 }
