@@ -2,7 +2,6 @@ package database
 
 import (
 	"database/sql"
-	"forum/models"
 	"log"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -17,20 +16,16 @@ func InitDB() {
 	if err != nil {
 		log.Fatal("unable to use data source name", err)
 	}
+
+	_, err = DB.Exec("PRAGMA foreign_keys = ON;")
+	if err != nil {
+		log.Fatal("Impossible d'activer les foreign keys : ", err)
+	}
+
 	err = DB.Ping()
 	if err != nil {
 		log.Fatal("Impossible de Joindre la DB")
 	}
-}
-
-func GetUserByEmail(email string) (*models.User, error) {
-	user := &models.User{}
-	err := DB.QueryRow("SELECT user_id, email, username, password FROM users WHERE email = ?", email).
-		Scan(&user.UserID, &user.Email, &user.Username, &user.Password)
-	if err != nil {
-		return nil, err
-	}
-	return user, nil
 }
 
 func CreateTables() {
@@ -53,17 +48,21 @@ func CreateTables() {
 		comment_id INTEGER PRIMARY KEY AUTOINCREMENT,
 		post INTEGER,
 		user INTEGER,
+		content TEXT,
+		created_at DATETIME,
 		FOREIGN KEY (post) REFERENCES posts (post_id),
 		FOREIGN KEY (user) REFERENCES users (user_id)
 	);
 	CREATE TABLE IF NOT EXISTS likes (
-		type TEXT,
+		count int,
 		post INTEGER,
 		user INTEGER,
 		comment INTEGER,
-		FOREIGN KEY (post) REFERENCES posts (post_id),
-		FOREIGN KEY (user) REFERENCES users (user_id),
-		FOREIGN KEY (comment) REFERENCES comments (comment_id)
+		created_at DATETIME,
+		FOREIGN KEY (post) REFERENCES posts (post_id) ON DELETE CASCADE,
+		FOREIGN KEY (user) REFERENCES users (user_id) ON DELETE CASCADE,
+		FOREIGN KEY (comment) REFERENCES comments (comment_id) ON DELETE CASCADE,
+		UNIQUE (post, user, comment)
 	);
 	CREATE TABLE IF NOT EXISTS categories (
 		categorie_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -72,8 +71,8 @@ func CreateTables() {
 	CREATE TABLE IF NOT EXISTS post_categories (
 		post_id INTEGER,
 		categorie_id INTEGER,
-		FOREIGN KEY (post_id) REFERENCES posts (post_id),
-		FOREIGN KEY (categorie_id) REFERENCES categories (categorie_id)
+		FOREIGN KEY (post_id) REFERENCES posts (post_id) ON DELETE CASCADE,
+		FOREIGN KEY (categorie_id) REFERENCES categories (categorie_id) ON DELETE CASCADE
 	);
 	`
 	_, err := DB.Exec(query)

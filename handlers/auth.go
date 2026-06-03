@@ -15,6 +15,7 @@ type LoginRequest struct {
 type LoginResponse struct {
 	Success bool        `json:"success"`
 	Message string      `json:"message"`
+	SessionID string    `json:"session_id,omitempty"`
 	UserID  int         `json:"user_id,omitempty"`
 	Username string     `json:"username,omitempty"`
 }
@@ -39,8 +40,6 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
-
-	///// Récupérer l'utilisateur depuis la base de données /////
 	user, err := database.GetUserByEmail(req.Email)
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
@@ -51,8 +50,6 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
-
-	///// Vérifier le mot de passe /////
 	if !security.CheckPassword(req.Password, user.Password) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusUnauthorized)
@@ -62,14 +59,21 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
-
-	///// Succès //////
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
+	SessionID, err := security.StoreUUID(w)
+	if err != nil {
+		json.NewEncoder(w).Encode(LoginResponse{
+			Success: false,
+			Message: "Erreur lors de la création de la session",
+		})
+		return
+	}
 	json.NewEncoder(w).Encode(LoginResponse{
 		Success:  true,
 		Message:  "Connexion réussie",
 		UserID:   user.UserID,
 		Username: user.Username,
+		SessionID: SessionID,
 	})
 }
