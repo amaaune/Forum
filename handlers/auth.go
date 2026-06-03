@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"forum/database"
+	"forum/models"
 	"forum/security"
 	"net/http"
 )
@@ -18,6 +19,16 @@ type LoginResponse struct {
 	SessionID string    `json:"session_id,omitempty"`
 	UserID  int         `json:"user_id,omitempty"`
 	Username string     `json:"username,omitempty"`
+}
+
+func GetUserByEmail(email string) (*models.User, error) {
+	user := &models.User{}
+	err := database.DB.QueryRow("SELECT user_id, email, username, password FROM users WHERE email = ?", email).
+		Scan(&user.UserID, &user.Email, &user.Username, &user.Password)
+	if err != nil {
+		return nil, err
+	}
+	return user, nil
 }
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
