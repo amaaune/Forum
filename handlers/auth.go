@@ -51,7 +51,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
-	user, err := database.GetUserByEmail(req.Email)
+	user, err := GetUserByEmail(req.Email)
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusUnauthorized)
