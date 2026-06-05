@@ -8,7 +8,8 @@ import (
 )
 
 func renderTemplate(w http.ResponseWriter, tmpl string) {
-	t, err := template.ParseFiles("templates/" + tmpl)
+	t, err := template.ParseFiles("templates/"+tmpl, "templates/poly/header.html",
+		"templates/poly/footer.html")
 	if err != nil {
 		http.Error(w, "Erreur template: "+err.Error(), http.StatusInternalServerError)
 		return
