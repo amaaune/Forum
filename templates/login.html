@@ -2,12 +2,16 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Connexion Google</title>
 
-    <link rel="stylesheet" href="../static/css/login.css">
+<link rel="stylesheet" href="../static/css/login.css">
+
 </head>
 <body>
+
+    <button onclick="window.history.back()" class="button" aria-label="Retour">← </button>
+    <a href="index.html" class="home-btn" aria-label="Retour à l'accueil">Accueil</a>
 
     <div class="login-container">
         <h2>Connexion</h2>
@@ -29,15 +33,9 @@
                 Se connecter
             </button>
 
-            <button type="button" class="forgot-btn" onclick="window.location.href='register.html'">
+            <a href="register.html" class="forgot-btn" style="display: inline-block; text-align: center; text-decoration: none;">
                 S'inscrire
-
-            </button>
-
-            <a href="index.html" class="home-btn">
-                Retour à l'accueil
             </a>
-
         </form>
 
     </div>
@@ -70,7 +68,6 @@
                     messageBox.style.color = '#155724';
                     messageBox.textContent = data.message;
                     
-                    // Rediriger après 1 seconde
                     setTimeout(() => {
                         window.location.href = '/';
                     }, 1000);
