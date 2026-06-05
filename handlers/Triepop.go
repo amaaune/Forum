@@ -1,7 +1,6 @@
-package middleware
+package handlers
 
 import (
-    "forum/handlers"
     "sort"
     "time"
 )
@@ -14,7 +13,7 @@ type PostScore struct {
 
 func Triepop() []string {
 
-    postes, err := handlers.GetPosts()
+    postes, err := GetPosts()
     if err != nil || len(postes) == 0 {
         return []string{}
     }
@@ -22,7 +21,7 @@ func Triepop() []string {
     var scores []PostScore
 
     for _, post := range postes {
-        likes, err := handlers.GetInteraction(post.PostID)
+        likes, err := GetInteraction(post.PostID)
         if err != nil {
             continue
         }
