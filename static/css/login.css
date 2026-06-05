@@ -65,7 +65,9 @@ body {
 }
 
 .login-btn:hover {
-    background: #000000;
+     background-color: #0a0850;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .login-btn:active {
@@ -94,7 +96,9 @@ body {
 }
 
 .google-btn:hover {
-    background: #f5f5f5;
+  background-color: #0a0850;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .forgot-btn {
@@ -112,7 +116,9 @@ body {
 }
 
 .forgot-btn:hover {
-    background: #000000;
+    background-color: #0a0850;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .forgot-btn:active {
@@ -134,7 +140,9 @@ body {
 }
 
 .a-btn:hover {
-    background: #000000;
+    background-color: #0a0850;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .home-btn {
@@ -157,7 +165,9 @@ body {
 }
 
 .home-btn:hover {
-    background-color: #000000;
+    background-color: #0a0850;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .button {
@@ -181,7 +191,9 @@ body {
 }
 
 .button:hover {
-    background-color: #000000;
+  background-color: #0a0850;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .leftbar {
