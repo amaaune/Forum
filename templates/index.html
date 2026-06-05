@@ -1,8 +1,82 @@
 <!DOCTYPE html>
- <head>
+ <!-- <head>
     <link rel="icon" href="/static/img/icons/icon.png">
- </head>
- 
- <body>
-    <h1>Ceci est un titre de remplacement</h1>
- </body>
+ </head> -->
+
+ {{template "header" .}}
+
+<main class="agora-container">
+   <aside class="sidebar-left">
+      <nav class="side-nav">
+        <ul>
+            <li><a href="/"><i class="icon"></i> Populaires</a></li>
+            <li><a href="/"><i class="icon"></i> Actualités</a></li>
+        </ul>
+    </nav>
+    <hr class="separator"> <section class="recent-section">
+        <div class="section-title">
+            <span>DERNIÈREMENT</span>
+            <i class="arrow-down"></i>
+        </div>
+        <ul>
+            <li><a href="/">r/Golang</a></li>
+        </ul>
+    </section>
+
+    <section class="resources-section">
+        <div class="section-title">RESSOURCES</div>
+        <ul>
+            <li><a href="/">À propos de Agora</a></li>
+            <li><a href="/">Règles</a></li>
+            <li><a href="/">Confidentialité</a></li>
+        </ul>
+    </section>
+   </aside>
+
+<div class="feed-and-right-sidebar">
+    <section class="feed-center">
+        <div class="create-post-bar">
+        <img src="/static/img/icons/icon.png" alt="User Avatar" class="user-avatar-mini">
+        
+        <a href="/post/create" class="create-input-link">Créer une publication</a>
+        
+        <div class="create-post-actions">
+            <a href="/post/create?type=image" title="Poster une image">
+                <i class="icon-image">🖼️</i>
+            </a>
+            <a href="/post/create?type=link" title="Poster un lien">
+                <i class="icon-link">🔗</i>
+            </a>
+        </div>
+    </div>
+    </section>
+
+    <aside class="sidebar-right">
+        <div class="widget communities-top">
+            <h3>COMMUNAUTÉS POPULAIRES</h3>
+            <ul>
+                <li>
+                    <img src="/static/img/icons/icon.png" class="community-thumb">
+                    <div class="community-info">
+                        <span class="name">a/Nantes</span>
+                        <span class="members">2.5k membres</span>
+                    </div>
+                    <button class="btn-join">Rejoindre</button>
+                </li>
+                </ul>
+            <button class="btn-view-all">En voir plus</button>
+        </div>
+
+        <div class="widget about-card">
+            <div class="banner-color"></div> <h3>À PROPOS D'AGORA</h3>
+            <p>Bienvenue sur Agora, l'espace d'échange dédié aux développeurs et passionnés de tech.</p>
+            <div class="stats-project">
+                <span><strong>2026</strong> Créé cette année</span>
+            </div>
+            <button class="btn-create-community">Créer une communauté</button>
+        </div>
+    </aside>
+</div>
+</main>
+
+{{template "footer" .}}
