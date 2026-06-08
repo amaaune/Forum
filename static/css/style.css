@@ -1,0 +1,17 @@
+/* 1. La base (Reset, variables de couleurs, polices) */
+@import "base.css";
+
+/* 2. Les composants récurrents (Ce qui est sur TOUTES les pages) */
+@import "header.css";
+@import "footer.css";
+@import "buttons.css";
+@import "alerts.css";
+@import "modal.css";
+
+/* 3. Les styles spécifiques aux pages */
+@import "index.css";
+@import "post.css";
+@import "category.css";
+@import "login.css";
+@import "register.css";
+@import "error.css";

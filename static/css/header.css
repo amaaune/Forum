@@ -1,0 +1,58 @@
+/* L'enveloppe globale */
+.main-header {
+    background-color: var(--card-bg);
+    border-bottom: 2px solid var(--sunset-blue);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.main-header {
+    /* On applique le dégradé sur tout le fond */
+    background-image: linear-gradient(to right, #FF7043, #6A1B9A, #223C73);
+    
+    /* On vire les anciennes propriétés de bordure transparente qui bloquaient */
+    border-bottom: none;
+    background-origin: padding-box;
+    background-clip: border-box;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* C'est ici que la magie opère */
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Logo à gauche, Liens au centre, Login à droite */
+    align-items: center;
+    padding: 0 20px;
+    height: 60px;
+    max-width: 1200px; /* Aligné avec ton agora-container */
+    margin: 0 auto;
+}
+
+/* Aligner le logo et le texte "gora" */
+.logo a {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Mettre les liens (Accueil) à l'horizontale */
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style du bouton de connexion façon "Charte Agora" */
+.btn-login {
+    background-color: var(--luminous-coral);
+    color: white !important;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+}
