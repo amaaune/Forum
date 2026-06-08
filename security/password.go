@@ -5,15 +5,15 @@ import (
     "golang.org/x/crypto/bcrypt"
 )
 
-func hashPassword(password string) (string, error) {
+func HashPassword(password string) (string, error) {
     hash, err := bcrypt.GenerateFromPassword([]byte(password), 10)
     return string(hash), err
 }
 
-func checkPassword(testpassword, truepassword string) bool {
-    hash, _ := hashPassword(truepassword)
+func CheckPassword(testpassword, truepassword string) bool {
+    hash, _ := HashPassword(truepassword)
    
-	testPassword, _ := hashPassword(testpassword)
+	testPassword, _ := HashPassword(testpassword)
 
 	if testPassword == hash {
 		fmt.Println("Mot de passe correct")

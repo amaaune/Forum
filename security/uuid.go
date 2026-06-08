@@ -6,7 +6,7 @@ import (
     "github.com/gofrs/uuid/v5"
 )
 
-func generateUUID() (string, error) {
+func GenerateUUID() (string, error) {
     id, err := uuid.NewV4()
     if err != nil {
         return "", err
@@ -14,8 +14,8 @@ func generateUUID() (string, error) {
     return id.String(), nil
 }
 
-func storeUUID(w http.ResponseWriter) (string, error) {
-    sessionID, err := generateUUID()
+func StoreUUID(w http.ResponseWriter) (string, error) {
+    sessionID, err := GenerateUUID()
     if err != nil {
         return "", err
     }
