@@ -33,7 +33,7 @@ func StoreUUID(w http.ResponseWriter) (string, error) {
     return sessionID, nil
 }
 
-func validateUUID(uuidStr string) bool {
+func ValidateUUID(uuidStr string) bool {
     id, err := uuid.FromString(uuidStr)
     if err != nil {
         return false
