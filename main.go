@@ -54,18 +54,16 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		renderTemplate(w, "index.html")
 	})
-	http.HandleFunc("/login",    login)
+	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+    renderTemplate(w, "login.html")   
+	})
+	http.HandleFunc("/api/login", handlers.LoginHandler)
 	http.HandleFunc("/error",    errorP)
 	http.HandleFunc("/register", register)
-
-	// ✅ post() est réutilisée ici
 	http.HandleFunc("/post",     middleware.RequireAuth(post))
-
-	// ✅ category() remplacée par handlers.CategoryHandler
 	http.HandleFunc("/category", middleware.RequireAuth(handlers.CategoryHandler))
-
 	http.HandleFunc("/logout", logoutHandler)
-
+	
 	log.Println("Serveur lancé sur http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
