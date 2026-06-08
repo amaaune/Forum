@@ -1,0 +1,145 @@
+/* ==========================================================================
+   VARIABLES (Charte Agora)
+   ========================================================================== */
+:root {
+    --sunset-blue: #223C73;
+    --twilight-purple: #6A1B9A;
+    --luminous-coral: #FF7043;
+    --bg-dark: #030303;
+    --card-bg: #1a1a1b;
+    --text-white: #d7dadc;
+    --text-gray: #818384;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.page {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 24px 16px;
+}
+
+.page-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-white);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #2d2d2e;
+}
+
+.post-card {
+    background-color: var(--card-bg);
+    border: 1px solid #2d2d2e;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.post-card h2 {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+}
+
+.post-card input[type="text"],
+.post-card textarea {
+    width: 100%;
+    background-color: #272729;
+    border: 1px solid #2d2d2e;
+    border-radius: 6px;
+    padding: 10px 14px;
+    color: var(--text-white);
+    font-size: 0.95rem;
+    font-family: inherit;
+    outline: none;
+    resize: none;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.post-card input[type="text"]:focus,
+.post-card textarea:focus {
+    border-color: var(--twilight-purple);  /* violet au focus */
+    background-color: #1f1f20;
+}
+
+.post-card input[type="text"]::placeholder,
+.post-card textarea::placeholder {
+    color: #555557;
+}
+
+.post-card textarea {
+    min-height: 120px;
+    line-height: 1.6;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 9px 18px;
+    border-radius: 20px;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.btn-secondary {
+    background-color: #272729;
+    color: var(--text-white);
+}
+
+.btn-secondary:hover {
+    background-color: #343437;
+    color: var(--luminous-coral);  /* coral au hover — cohérent avec ton global.css */
+}
+
+.btn-primary {
+    background-color: var(--twilight-purple);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #7B1FA2;
+}
+
+.divider {
+    height: 1px;
+    background-color: #2d2d2e;
+    margin: 4px 0 16px;
+}
+
+.publish-bar {
+    background-color: var(--card-bg);
+    border: 1px solid #2d2d2e;
+    border-radius: 8px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.publish-hint {
+    font-size: 13px;
+    color: #555557;
+}
