@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Erreur {{.Code}}</title>
+    <link rel="stylesheet" href="/static/css/error.css">
+</head>
+<body>
+    <div class="page">
+        <div class="card">
+            <div class="code-badge">
+                <span>{{.Code}}</span>
+            </div>
+            <p class="title">{{.Title}}</p>
+            <p class="message">{{.Message}}</p>
+            <a class="btn" href="/">
+                ← Retour à l'accueil
+            </a>
+            <div class="divider"></div>
+            <p class="hint">Si le problème persiste, contacte un administrateur.</p>
+        </div>
+    </div>
+</body>
+</html>
