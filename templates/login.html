@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion — Agora</title>
-    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="../static/css/login.css">
 </head>
 <body>
 
@@ -35,7 +35,11 @@
                 <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
             </div>
 
-            <button type="submit" class="login-btn">Se connecter</button>
+             <button onclick="LogAccount(document.getElementById('email').value, document.getElementById('password').value)" type="button" class="login-btn">
+                Se connecter
+            </button>
+
+            
             <p>Pas encore de compte ? </p>
             <button type="button" class="login-btn" onclick="window.location.href='/register'">S'inscrire</button>
         </form>
@@ -44,59 +48,7 @@
 
     </div>
 
-    <script>
-
-const CreateAccount = async (email, username, password) => {
-    if (!email || !username || !password) {
-        throw new Error("Informations incorrectes");
-    }
-
-    const query = `
-      SELECT users (email, username, password)
-        VALUES (?, ?, ?)
-    `;
-
-    try {
-        await database.DB.Exec(query, email, username, password);
-        return true;
-    } catch (err) {
-        throw err;
-    }
-};
-
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const email      = document.getElementById('email').value;
-        const password   = document.getElementById('password').value;
-        const messageBox = document.getElementById('messageBox');
-
-        try {
-            const response = await fetch('/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
-
-            const data = await response.json();
-            messageBox.style.display = 'block';
-
-            if (data.success) {
-                messageBox.className = 'message-box message-success';
-                messageBox.textContent = data.message;
-                setTimeout(() => window.location.href = '/', 1000);
-            } else {
-                messageBox.className = 'message-box message-error';
-                messageBox.textContent = data.message;
-            }
-
-        } catch (error) {
-            messageBox.style.display = 'block';
-            messageBox.className = 'message-box message-error';
-            messageBox.textContent = 'Erreur serveur: ' + error.message;
-        }
-    });
-    </script>
+ 
 
 </body>
 </html>
