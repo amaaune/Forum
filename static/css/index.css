@@ -1,0 +1,152 @@
+/* ==========================================================================
+   HABILLAGE DES POST CARDS (Style Agora Premium)
+   ========================================================================== */
+
+/* L'alignement de la carte (Système de vote à gauche, contenu à droite) */
+.post-card {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 16px;
+  padding: 16px !important; /* Un peu d'air à l'intérieur */
+}
+
+/* 1. SYSTÈME DE VOTE (Colonne Gauche - Ajusté pour SVG) */
+.post-voter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 44px;
+  user-select: none;
+}
+
+/* Zone de clic propre pour les boutons SVG */
+.post-voter button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  transition: transform 0.15s;
+}
+
+/* Domptage de la taille des logos A et V en SVG 🌟 */
+.vote-icon {
+  width: 24px !important;
+  height: 24px !important;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(40%); /* Discret au repos */
+  transition: filter 0.2s;
+}
+
+/* Animation et allumage des couleurs au survol ! */
+.post-voter button:hover {
+  transform: scale(1.15);
+}
+.post-voter .arrow-up:hover .vote-icon {
+  filter: grayscale(0%) opacity(100%); /* Allume l'orange Coral */
+}
+.post-voter .arrow-down:hover .vote-icon {
+  filter: grayscale(0%) opacity(100%); /* Allume le violet Twilight */
+}
+
+/* Le score au centre */
+.post-voter .score {
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: var(--text-white);
+  transition: color 0.2s;
+  margin: 2px 0;
+}
+
+/* Rappels de couleur si le user a déjà voté (Actif) */
+.post-voter.upvoted .vote-icon {
+  filter: grayscale(0%) opacity(100%);
+}
+.post-voter.upvoted .score {
+  color: var(--luminous-coral);
+}
+
+.post-voter.downvoted .vote-icon {
+  filter: grayscale(0%) opacity(100%);
+}
+.post-voter.downvoted .score {
+  color: var(--twilight-purple);
+}
+
+/* 2. ZONE DE CONTENU (Colonne Droite - Éléments conservés intacts) */
+.post-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Infos du haut (Auteur, communauté, date) */
+.post-info {
+  font-size: 0.8rem;
+  color: var(--text-gray);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.post-info .community {
+  color: var(--text-white);
+  font-weight: bold;
+  background-color: #272729; /* Petit badge pour la commu */
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+}
+
+.post-info .author {
+  color: #b3b3b3;
+}
+
+/* Titre du Post */
+.post-body h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--text-white);
+  font-weight: 600;
+}
+
+/* Corps du texte */
+.post-body p {
+  margin: 4px 0 0 0;
+  font-size: 0.95rem;
+  color: #ccc;
+  line-height: 1.5;
+}
+
+/* 3. BOUTONS D'ACTIONS (Commentaires, Partager - Éléments conservés intacts) */
+.post-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.btn-action {
+  background-color: #272729; /* Fond gris sombre discret */
+  border: none;
+  color: var(--text-white);
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 20px; /* Boutons bien ronds style Reddit moderne */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.2s;
+}
+
+.btn-action:hover {
+  background-color: #343437; /* Éclaircissement au survol */
+}
