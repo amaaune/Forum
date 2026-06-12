@@ -2,5 +2,6 @@
 forum
 
 forum.db
+
 go.mod
 go.sum
