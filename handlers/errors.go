@@ -1,8 +1,6 @@
 package handlers
-import (
-    "html/template"
-    "net/http"
-)
+
+import "net/http"
 
 type ErrorData struct {
     Code    int    
@@ -10,14 +8,19 @@ type ErrorData struct {
     Message string 
 }
 
+func RenderError(w http.ResponseWriter, code int, message string) {
+	w.WriteHeader(code)
+	w.Write([]byte(message))
+}
+
 func NotFound(w http.ResponseWriter, r *http.Request) {
-	handlers.RenderError(w, http.StatusNotFound, "La page que vous cherchez n'existe pas.")
+	RenderError(w, http.StatusNotFound, "La page que vous cherchez n'existe pas.")
 }
 
 func Forbidden(w http.ResponseWriter, r *http.Request) {
-	handlers.RenderError(w, http.StatusForbidden, "Vous n'avez pas la permission d'accéder à cette page.")
+	RenderError(w, http.StatusForbidden, "Vous n'avez pas la permission d'accéder à cette page.")
 }
 
 func InternalError(w http.ResponseWriter, r *http.Request) {
-	handlers.RenderError(w, http.StatusInternalServerError, "Une erreur inattendue s'est produite.")
+	RenderError(w, http.StatusInternalServerError, "Une erreur inattendue s'est produite.")
 }

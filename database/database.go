@@ -64,6 +64,14 @@ func CreateTables() {
 		FOREIGN KEY (comment) REFERENCES comments (comment_id) ON DELETE CASCADE,
 		UNIQUE (post, user, comment)
 	);
+	CREATE TABLE IF NOT EXISTS recent_categories (
+		user_id      INTEGER NOT NULL,
+		categorie_id INTEGER NOT NULL,
+		visited_at   DATETIME DEFAULT (datetime('now')),
+		FOREIGN KEY (user_id)      REFERENCES users(user_id),
+		FOREIGN KEY (categorie_id) REFERENCES categories(categorie_id),
+		PRIMARY KEY (user_id, categorie_id)  -- un utilisateur ne peut pas avoir deux fois la même catégorie
+	);
 	CREATE TABLE IF NOT EXISTS categories (
 		categorie_id INTEGER PRIMARY KEY AUTOINCREMENT,
 		name TEXT
