@@ -48,6 +48,15 @@
                 <i class="icon-link">🔗</i>
             </a>
         </div>
+        {{range .}}
+            <div class="feed-posts">
+                <p>{{.User}}, {{.CreatedAt}}</p>
+                <p>{{range .Categories}}{{.Name}}{{end}}</p>
+                <h1>{{.Title}}</h1>
+                <p>{{.Content}}</p>
+                <div>{{.Score}}</div>
+            </div>
+        {{ end }}
     </div>
     </section>
 
