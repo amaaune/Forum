@@ -4,28 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGORA</title>
-    <link rel="stylesheet" href="../static/css/category.css">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
 
-    <header class="navbar">
-        <a href="index.html" class="logo">AGORA</a>
+    <header class="navbar.category">
+        <a href="index.html" class="logo.category">AGORA</a>
 
-<a href="login.html" class="nav-buttons button">connexion </a>
-<a href="login.html" class="nav-buttons button">inscription</a>
-        <div class="search-box">
+<a href="login.html" class="nav-buttons.category button">connexion </a>
+<a href="login.html" class="nav-buttons.category button">inscription</a>
+        <div class="search-box.category">
             <input type="text" placeholder="Rechercher...">
         </div>
 
-        <div class="nav-buttons">
+        <div class="nav-buttons.category">
             <button>Connexion</button>
-            <button class="signup">Inscription</button>
+            <button class="signup.category">Inscription</button>
         </div>
     </header>
 
-    <div class="container">
+    <div class="container.category">
 
-        <aside class="sidebar">
+        <aside class="sidebar.category">
             <h3>Forums</h3>
             <ul>
                 <li>A/Ynov</li>
@@ -35,11 +35,11 @@
             </ul>
         </aside>
 
-        <main class="feed">
+        <main class="feed.category">
             
             {{if .IsLoggedIn}}
                 {{if .RecentCategories}}
-                <div class="recent-categories">
+                <div class="recent-categories.category">
                     <h3>Récemment visitées</h3>
                     <ul>
                         {{range .RecentCategories}}
@@ -54,97 +54,97 @@
                 {{end}}
             {{end}}
 
-            <article class="post">
-                <div class="votes">
+            <article class="post.category">
+                <div class="votes.category">
                     ▲
                     <span>124</span>
                     ▼
                 </div>
 
-                <div class="post-content">
-                    <span class="community">A/Programmation</span>
+                <div class="post-content.category">
+                    <span class="community.category">A/Programmation</span>
                     <h2>a</h2>
                     <p>
                        b
                     </p>
-                    <div class="post-info">
+                    <div class="post-info.category">
                         67 commentaires
                     </div>
                 </div>
             </article>
 
-            <article class="post">
-                <div class="votes">
+            <article class="post.category">
+                <div class="votes.category">
                     ▲
                     <span>853</span>
                     ▼
                 </div>
 
-                <div class="post-content">
-                    <span class="community">A/News</span>
+                <div class="post-content.category">
+                    <span class="community.category">A/News</span>
                     <h2>Combat en cage Remy/Jules</h2>
                     <p>
                         Un combat épique a eu lieu hier soir entre deux champions.
                     </p>
-                    <div class="post-info">
+                    <div class="post-info.category">
                         67 commentaires
                     </div>
                 </div>
             </article>
 
-            <article class="post">
-                <div class="votes">
+            <article class="post.category">
+                <div class="votes.category">
                     ▲
                     <span>432</span>
                     ▼
                 </div>
 
-                <div class="post-content">
-                    <span class="community">A/Gaming</span>
+                <div class="post-content.category">
+                    <span class="community.category">A/Gaming</span>
                     <h2>p</h2>
                     <p>
                         Partagez vos réactions !
                     </p>
-                    <div class="post-info">
+                    <div class="post-info.category">
                         67 commentaires
                     </div>
                 </div>
          
             </article>
-         <article class="post">
-                <div class="votes">
+         <article class="post.category">
+                <div class="votes.category">
                     ▲
                     <span>432</span>
                     ▼
                 </div>
 
-                <div class="post-content">
-                    <span class="community">A/Gaming</span>
+                <div class="post-content.category">
+                    <span class="community.category">A/Gaming</span>
                     <h2>C</h2>
                     <p>
                         Partagez vos réactions !
                     </p>
-                    <div class="post-info">
+                    <div class="post-info.category">
                         67 commentaires
                     </div>
 
                 </div>
             </article>
 
-                     <article class="post">
-                <div class="votes">
+                     <article class="post.category">
+                <div class="votes.category">
                     ▲
                     <span>432</span>
                     ▼
                 </div>
 
-                <div class="post-content">
-                    <span class="community">A/Ynov</span>
+                <div class="post-content.category">
+                    <span class="community.category">A/Ynov</span>
                     <h2>Le retour de Germain DJE </h2>
                     <p>
                         Partagez vos réactions !
                     </p>
-                    <div class="post-info">
+                    <div class="post-info.category">
                         67 commentaires
                     </div>
 

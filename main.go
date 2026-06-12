@@ -23,10 +23,11 @@ func renderTemplate(w http.ResponseWriter, tmpl string) {
 	}
 }
 
-func login(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "login.html")
-}
-
+/*
+	func login(w http.ResponseWriter, r *http.Request) {
+		renderTemplate(w, "login.html")
+	}
+*/
 func errorP(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "error.html")
 }
@@ -55,15 +56,15 @@ func main() {
 		renderTemplate(w, "index.html")
 	})
 	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
-    renderTemplate(w, "login.html")   
+		renderTemplate(w, "login.html")
 	})
 	http.HandleFunc("/api/login", handlers.LoginHandler)
-	http.HandleFunc("/error",    errorP)
+	http.HandleFunc("/error", errorP)
 	http.HandleFunc("/register", register)
-	http.HandleFunc("/post",     middleware.RequireAuth(post))
+	http.HandleFunc("/post", middleware.RequireAuth(post))
 	http.HandleFunc("/category", middleware.RequireAuth(handlers.CategoryHandler))
 	http.HandleFunc("/logout", logoutHandler)
-	
+
 	log.Println("Serveur lancé sur http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
