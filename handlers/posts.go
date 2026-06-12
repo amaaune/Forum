@@ -6,7 +6,7 @@ import (
 )
 
 func GetPosts() ([]models.Post, error) {
-	rows, err := database.DB.Query("SELECT * FROM posts")
+	rows, err := database.DB.Query("SELECT * FROM posts ORDER BY created_at DESC")
 	if err != nil {
 		return nil, err
 	}
