@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Inscription</title>
+
+<link rel="stylesheet" href="./static/css/register.css">
+
+</head>
+<body>
+
+    <button onclick="window.history.back()" class="button" aria-label="Retour">← </button>
+    <a href="index.html" class="home-btn" aria-label="Retour à l'accueil">Accueil</a>
+
+    <div class="login-container">
+        <h2>Inscription</h2>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="email">Adresse mail</label>
+                <input type="email" id="email" name="email" placeholder="Entrez votre email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+            </div>
+
+            <div id="messageBox" style="display: none; margin-bottom: 15px; padding: 10px; border-radius: 4px; text-align: center;"></div>
+
+            <button type="submit" class="login-btn">
+                Se connecter
+            </button>
+
+            <a href="login.html" class="forgot-btn" style="display: inline-block; text-align: center; text-decoration: none;">
+                J'ai déjà un compte
+            </a>
+        </form>
+
+    </div>
+
+    <script>
+
+ const CreateAccount = async (email, username, password) => {
+    if (!email || !username || !password) {
+        throw new Error("Informations incorrectes");
+    }
+
+    const query = (`
+        INSERT INTO users (email, username, password)
+        VALUES (?, ?, ?)
+    `, email, username, password);
+
+    try {
+        await database.DB.Exec(query, email, username, password);
+        return true;
+    } catch (err) {
+        throw err;
+    }
+};
+
+    </script>
+
+
+</body>
+</html>

@@ -45,6 +45,25 @@
     </div>
 
     <script>
+
+const CreateAccount = async (email, username, password) => {
+    if (!email || !username || !password) {
+        throw new Error("Informations incorrectes");
+    }
+
+    const query = `
+      SELECT users (email, username, password)
+        VALUES (?, ?, ?)
+    `;
+
+    try {
+        await database.DB.Exec(query, email, username, password);
+        return true;
+    } catch (err) {
+        throw err;
+    }
+};
+
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
         e.preventDefault();
 
