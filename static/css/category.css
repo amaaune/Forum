@@ -8,66 +8,116 @@ body {
     font-family: Arial, sans-serif;
     color: #fffdfd;
     background: #0e082c;
+    scroll-behavior: smooth;
 }
 
 .navbar {
     position: sticky;
     top: 0;
     background: rgb(72, 69, 95);
-    height: 60px;
+    height: auto;
+    min-height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: clamp(10px, 3vw, 20px);
     border-bottom: 1px solid #ddd;
+    gap: clamp(10px, 2vw, 20px);
+    z-index: 50;
+    flex-wrap: wrap;
 }
 
-.logo {
-    font-size: 24px;
+.Agora {
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
     font-weight: bold;
-    background: linear-gradient(135deg, #d433cc, #3c0166, #976017);
     cursor: pointer;
+    text-decoration: none;
+    background: linear-gradient(135deg, #d133c9, #500486, #976017);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+    transition: transform 0.3s ease;
+}
+
+.Agora:hover {
+    transform: scale(1.05);
 }
 
 .search-box {
     flex: 1;
-    margin: 0 20px;
+    min-width: 150px;
+    max-width: 500px;
 }
 
 .search-box input {
     width: 100%;
-    padding: 10px;
+    padding: clamp(8px, 2vw, 10px);
     border-radius: 20px;
     border: 1px solid #030303;
+    font-size: clamp(14px, 2vw, 16px);
+    transition: all 0.3s ease;
 }
 
-.nav-buttons button {
-    padding: 8px 15px;
-    border-radius: 20px;
+.search-box input:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(212, 51, 204, 0.5);
+}
+
+.nav-buttons {
+    display: flex;
+    gap: clamp(8px, 2vw, 15px);
+    flex-wrap: wrap;
+}
+
+.login-btn,
+.login-btn2 {
+    padding: clamp(8px, 2vw, 12px) clamp(16px, 3vw, 24px);
+    background-color: #ee6f1b;
+    color: rgb(241, 241, 241);
     border: none;
+    border-radius: 20px;
     cursor: pointer;
-    margin-left: 10px;
+    font-size: clamp(14px, 2vw, 16px);
+    transition: all 0.3s ease;
+    position: relative;
+    white-space: nowrap;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.login-btn:hover,
+.login-btn2:hover {
+    background-color: #ffa600;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
 
 .container {
     display: flex;
     max-width: 1400px;
+    width: 100%;
     margin: 20px auto;
-    gap: 20px;
+    gap: clamp(15px, 3vw, 20px);
+    padding: clamp(10px, 3vw, 20px);
 }
-
 
 .sidebar {
     width: 250px;
     background: rgb(61, 58, 85);
     border-radius: 8px;
-    padding: 20px;
+    padding: clamp(15px, 2vw, 20px);
     height: fit-content;
+    position: sticky;
+    top: 100px;
+    animation: slideInLeft 0.5s ease;
 }
 
 .sidebar h3 {
     margin-bottom: 15px;
+    font-size: clamp(1rem, 2vw, 1.2rem);
 }
 
 .sidebar ul {
@@ -75,83 +125,389 @@ body {
 }
 
 .sidebar li {
-    padding: 10px 0;
+    padding: clamp(8px, 1vw, 10px) 0;
     cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
 }
 
 .sidebar li:hover {
     color: #ac7817;
+    padding-left: 10px;
 }
-
 
 .feed {
     flex: 1;
+    min-width: 0;
 }
-
 
 .post {
     background: rgb(40, 38, 56);
     display: flex;
     border-radius: 8px;
-    margin-bottom: 15px;
+    margin-bottom: clamp(12px, 2vw, 15px);
     overflow: hidden;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.5s ease;
+    cursor: pointer;
+}
+
+.post:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(212, 51, 204, 0.2);
 }
 
 .votes {
     width: 60px;
-     background: linear-gradient(135deg, #d433cc, #3c0166, #976017);
+    background: linear-gradient(135deg, #d433cc, #3c0166, #976017);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
+    justify-content: center;
+    padding: clamp(8px, 2vw, 10px);
     gap: 5px;
     font-weight: bold;
     color: #f5e7e7;
+    min-height: 80px;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.votes:hover {
+    transform: scale(1.05);
+}
+
+.votes span {
+    font-size: clamp(1rem, 2vw, 1.2rem);
 }
 
 .post-content {
-    padding: 15px;
+    padding: clamp(12px, 2vw, 15px);
     flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .community {
     color: #fcfeff;
-    font-size: 13px;
+    font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+    text-transform: uppercase;
+    margin-bottom: 5px;
 }
 
 .post-content h2 {
-    margin: 10px 0;
-    font-size: 22px;
+    word-wrap: break-word;
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    margin-bottom: 8px;
 }
 
 .post-content p {
     color: #ffffff;
     line-height: 1.5;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    flex-grow: 1;
 }
 
 .post-info {
-    margin-top: 15px;
+    margin-top: 10px;
     color: #939596;
-    font-size: 14px;
+    font-size: clamp(0.8rem, 1.5vw, 0.9rem);
 }
 
+button {
+    transition: all 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulseVote {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .sidebar {
+        width: 200px;
+        padding: 15px;
+        top: 90px;
+    }
+
+    .post {
+        margin-bottom: 12px;
+    }
+
+    .votes {
+        width: 55px;
+        min-height: 75px;
+        padding: 8px;
+    }
+}
+@media screen and (max-width: 768px) {
     .container {
         flex-direction: column;
-        padding: 0 10px;
+        padding: 12px;
+        gap: 15px;
     }
 
     .sidebar {
         width: 100%;
+        position: static;
+        margin-bottom: 15px;
+        animation: none;
     }
 
     .navbar {
         flex-wrap: wrap;
-        height: auto;
         padding: 10px;
+        height: auto;
+    }
+
+    .Agora {
+        order: 1;
+        margin-right: auto;
     }
 
     .search-box {
+        order: 3;
         width: 100%;
-        margin: 10px 0;
+        max-width: 100%;
+        margin-top: 10px;
     }
 
+    .nav-buttons {
+        order: 2;
+        gap: 8px;
+    }
+
+    .login-btn,
+    .login-btn2 {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    .post {
+        flex-direction: column;
+    }
+
+    .votes {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+        gap: 15px;
+        min-height: auto;
+        padding: 10px;
+    }
+
+    .post-content {
+        padding: 12px;
+    }
+
+    #openBtn {
+        display: flex;
+    }
+
+    .déroule {
+        width: 80%;
+        right: -80%;
+    }
+
+    .déroule.open {
+        right: 0;
+    }
+
+    .feed {
+        margin-bottom: 80px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .navbar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px 8px;
+        gap: 8px;
+    }
+
+    .Agora {
+        text-align: center;
+        order: 1;
+        margin: 0;
+    }
+
+    .search-box {
+        order: 3;
+        width: 100%;
+        margin: 8px 0;
+    }
+
+    .nav-buttons {
+        order: 2;
+        width: 100%;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .login-btn,
+    .login-btn2 {
+        flex: 1;
+        min-width: 100px;
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .container {
+        flex-direction: column;
+        padding: 10px 8px;
+        margin: 10px auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .sidebar li {
+        padding: 8px 0;
+        font-size: 0.95rem;
+    }
+
+    .post {
+        flex-direction: column;
+        margin-bottom: 10px;
+        border-radius: 6px;
+    }
+
+    .post:hover {
+        transform: none;
+    }
+
+    .votes {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 20px;
+        padding: 8px;
+        min-height: auto;
+    }
+
+    .post-content {
+        padding: 10px;
+    }
+
+    .post-content h2 {
+        font-size: 1rem;
+        margin-bottom: 6px;
+    }
+
+    .post-content p {
+        font-size: 0.9rem;
+    }
+
+    .community {
+        font-size: 0.75rem;
+    }
+
+    #openBtn {
+        padding: 10px 15px;
+        font-size: 14px;
+        bottom: 15px;
+        left: 15px;
+    }
+
+    .déroule {
+        width: 100%;
+        right: -100%;
+        padding: 15px;
+    }
+
+    .feed {
+        margin-bottom: 70px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .Agora {
+        font-size: 1.3rem;
+    }
+
+    .navbar {
+        padding: 8px;
+    }
+
+    .login-btn,
+    .login-btn2 {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .post-content h2 {
+        font-size: 0.95rem;
+    }
+
+    .votes span {
+        font-size: 0.95rem;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+    .navbar {
+        min-height: 50px;
+    }
+
+    .sidebar {
+        top: 70px;
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+    }
+
+    .post {
+        margin-bottom: 10px;
+    }
+
+    .votes {
+        min-height: 60px;
+        padding: 6px;
+    }
+
+    #openBtn {
+        bottom: 10px;
+    }
+}
