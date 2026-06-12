@@ -1,0 +1,32 @@
+{{define "header"}}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agora</title>
+    
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+    <link rel="icon" href="/static/img/icons/icon.png">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="/">
+                    <img src="/static/img/logo/logo.png" alt="Logo Agora" width="50">gora
+                </a>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="/">Search</a></li>
+                <li><div></div></li>
+                </ul>
+
+            <div class="user-menu">
+                <a href="/login" class="btn-login">Connexion</a>
+            </div>
+        </nav>
+    </header>
+{{end}}
