@@ -1,46 +1,38 @@
-package users
+package handlers
 
 import (
 	"database/sql"
 	"errors"
-	"regexp"
-	"strings"
+
+	"forum/security"
+	"forum/validate"
 )
 
 func CreateAccount(db *sql.DB, email string, username string, password string) (bool, error) {
 
-	if strings.TrimSpace(email) == "" {
-		return false, errors.New("email obligatoire")
+	if !validate.IsValidUsername(username) {
+		return false, errors.New("invalid username")
 	}
 
-	emailRegex := `^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$`
-	if !regexp.MustCompile(emailRegex).MatchString(email) {
-		return false, errors.New("email invalide")
+	if !validate.IsUniqueUsername(db, username) {
+		return false, errors.New("username already exists")
 	}
 
-	if strings.TrimSpace(username) == "" {
-		return false, errors.New("nom d'utilisateur obligatoire")
+	if !validate.IsValidEmail(email) {
+		return false, errors.New("invalid email")
 	}
 
-	if len(username) < 3 || len(username) > 30 {
-		return false, errors.New("le nom d'utilisateur doit contenir entre 3 et 30 caractères")
+	if !validate.IsUniqueEmail(db, email) {
+		return false, errors.New("email already exists")
 	}
 
-	usernameRegex := `^[a-zA-Z0-9_]+$`
-	if !regexp.MustCompile(usernameRegex).MatchString(username) {
-		return false, errors.New("nom d'utilisateur invalide (lettres, chiffres et _ uniquement)")
+	if !validate.IsValidPassword(password) {
+		return false, errors.New("invalid password")
 	}
 
-	if len(password) < 8 {
-		return false, errors.New("le mot de passe doit contenir au moins 8 caractères")
-	}
-
-	hasUpper := regexp.MustCompile(`[A-Z]`).MatchString(password)
-	hasLower := regexp.MustCompile(`[a-z]`).MatchString(password)
-	hasNumber := regexp.MustCompile(`[0-9]`).MatchString(password)
-
-	if !hasUpper || !hasLower || !hasNumber {
-		return false, errors.New("le mot de passe doit contenir une majuscule, une minuscule et un chiffre")
+	hashedPassword, err := security.HashPassword(password)
+	if err != nil {
+		return false, err
 	}
 
 	query := `
@@ -48,7 +40,7 @@ func CreateAccount(db *sql.DB, email string, username string, password string) (
 		VALUES (?, ?, ?)
 	`
 
-	_, err := db.Exec(query, email, username, password)
+	_, err = db.Exec(query, email, username, hashedPassword)
 	if err != nil {
 		return false, err
 	}
