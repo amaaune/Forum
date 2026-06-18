@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="./static/css/register.css">
+</head>
+<body>
+<div class="register-body">
+
+    <button onclick="window.history.back()" class="register-button" aria-label="Retour">←</button>
+    <a href="index.html" class="register-home-btn" aria-label="Retour à l'accueil">Accueil</a>
+
+    <div class="register-container">
+        <h2>Inscription</h2>
+
+        <form id="registerForm">
+
+            <div class="register-input-group">
+                <label for="username">Nom d'utilisateur</label>
+                <input type="text" id="username" name="username" placeholder="Entrez votre nom d'utilisateur" required>
+            </div>
+
+            <div class="register-input-group">
+                <label for="email">Adresse mail</label>
+                <input type="email" id="email" name="email" placeholder="Entrez votre email" required>
+            </div>
+
+            <div class="register-input-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+            </div>
+
+            <div id="messageBox" style="display: none; margin-bottom: 15px; padding: 10px; border-radius: 4px; text-align: center;" class="register-message-box"></div>
+
+            <button onclick="CreateAccount(document.getElementById('email').value, document.getElementById('username').value, document.getElementById('password').value)" type="button" class="register-btn">
+                S'inscrire
+            </button>
+
+            <a href="login.html" class="register-forgot-btn">
+                J'ai déjà un compte
+            </a>
+
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

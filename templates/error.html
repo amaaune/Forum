@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Erreur {{.Code}}</title>
-    <link rel="stylesheet" href="/static/css/error.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <div class="page">
-        <div class="card">
-            <div class="code-badge">
+    <div class="page.error">
+        <div class="card.error">
+            <div class="code-badge.error">
                 <span>{{.Code}}</span>
             </div>
-            <p class="title">{{.Title}}</p>
-            <p class="message">{{.Message}}</p>
-            <a class="btn" href="/">
+            <p class="title.error">{{.Title}}</p>
+            <p class="message.error">{{.Message}}</p>
+            <a class="btn.error" href="/">
                 ← Retour à l'accueil
             </a>
-            <div class="divider"></div>
-            <p class="hint">Si le problème persiste, contacte un administrateur.</p>
+            <div class="divider.error"></div>
+            <p class="hint.error">Si le problème persiste, contacte un administrateur.</p>
         </div>
     </div>
 </body>
