@@ -155,6 +155,8 @@ func CreateCommentHandler(w http.ResponseWriter, r *http.Request) {
 type PostDetailData struct {
 	Post     models.Post
 	Comments []models.Comment
+	IsAuth   bool
+	Username string
 }
 
 func SinglePostHandler(w http.ResponseWriter, r *http.Request, render func(http.ResponseWriter, string, any)) {
@@ -194,10 +196,58 @@ func SinglePostHandler(w http.ResponseWriter, r *http.Request, render func(http.
 		comments = []models.Comment{}
 	}
 
+	// 2. On injecte les données d'authentification pour feinter le header ici aussi
 	data := PostDetailData{
 		Post:     post,
 		Comments: comments,
+		IsAuth:   true,
+		Username: "AdminTest",
 	}
 
 	render(w, "post.html", data)
+}
+
+type CategoryRenderData struct {
+	CategoryName string
+	Posts        []models.Post
+	Categories   []models.Category // Pour afficher la liste dans la sidebar si besoin
+	IsAuth       bool
+	Username     string
+}
+
+func CategoryHandler(w http.ResponseWriter, r *http.Request, render func(http.ResponseWriter, string, any)) {
+	// 1. On récupère la liste globale des catégories (indispensable dans tous les cas)
+	categories, _ := GetAllCategories() // ou ton GetAllCategories()
+
+	catName := r.URL.Query().Get("name")
+
+	// 2. CAS 1 : Si l'URL est juste /category (sans nom), on affiche TOUTES les catégories
+	if catName == "" {
+		data := CategoryRenderData{
+			CategoryName: "Toutes les catégories",
+			Posts:        nil, // Pas de posts ciblés à afficher, ou tu peux laisser vide
+			Categories:   categories,
+			IsAuth:       true,
+			Username:     "AdminTest",
+		}
+		render(w, "category.html", data)
+		return
+	}
+
+	// 3. CAS 2 : Si on a un ?name=Golang, on récupère les posts associés
+	posts, err := GetPosts() // Idéalement filtré par catégorie plus tard
+	if err != nil {
+		http.Redirect(w, r, "/error", http.StatusSeeOther)
+		return
+	}
+
+	data := CategoryRenderData{
+		CategoryName: catName,
+		Posts:        posts,
+		Categories:   categories,
+		IsAuth:       true,
+		Username:     "AdminTest",
+	}
+
+	render(w, "category.html", data)
 }

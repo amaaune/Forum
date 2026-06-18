@@ -56,6 +56,9 @@ func main() {
 		handlers.ErrorHandler(w, r, renderTemplate)
 	})
 
+	http.HandleFunc("/category", func(w http.ResponseWriter, r *http.Request) {
+		handlers.CategoryHandler(w, r, renderTemplate) 
+	})
 	// 4. Routes Protégées par Middleware Auth
 	// http.HandleFunc("/post", middleware.RequireAuth(func(w http.ResponseWriter, r *http.Request) {
 	// 	handlers.PostHandler(w, r, renderTemplate)

@@ -1,158 +1,80 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AGORA</title>
-    <link rel="stylesheet" href="../static/css/category.css">
-</head>
-<body>
+{{template "header" .}}
 
-    <header class="navbar">
-        <a href="index.html" class="logo">AGORA</a>
+<title>Agora - {{.CategoryName}}</title>
+<link rel="stylesheet" href="/static/css/category.css" />
+<link rel="stylesheet" href="/static/css/footer.css" />
 
-<a href="login.html" class="nav-buttons button">connexion </a>
-<a href="login.html" class="nav-buttons button">inscription</a>
-        <div class="search-box">
-            <input type="text" placeholder="Rechercher...">
+<div class="container" style="margin-top: 100px">
+  <aside class="left-sidebar">
+    <h3>Forums</h3>
+    <ul>
+      {{range .Categories}}
+      <li><a href="/category?name={{.Name}}">a/{{.Name}}</a></li>
+      {{end}}
+    </ul>
+  </aside>
+
+  <main class="feed">
+    <h2
+      style="
+        color: #ffffff;
+        margin-bottom: 24px;
+        font-size: 1.6rem;
+        font-weight: 700;
+      "
+    >
+      Explorer les communautés d'Agora
+    </h2>
+
+    <div
+      class="categories-list-container"
+      style="display: flex; flex-direction: column; gap: 12px"
+    >
+      {{range .Categories}}
+      <div
+        class="category-card"
+        style="
+          background-color: #1a1a1b;
+          border: 1px solid #343536;
+          padding: 20px;
+          border-radius: 8px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <div>
+          <h3 style="margin: 0; font-size: 1.2rem">
+            <a
+              href="/category?name={{.Name}}"
+              style="color: #9d4edd; text-decoration: none; font-weight: 600"
+              >a/{{.Name}}</a
+            >
+          </h3>
+          <p style="color: #818384; margin: 4px 0 0 0; font-size: 0.85rem">
+            Rejoignez la communauté pour échanger et partager.
+          </p>
         </div>
-
-        <div class="nav-buttons">
-            <button>Connexion</button>
-            <button class="signup">Inscription</button>
-        </div>
-    </header>
-
-    <div class="container">
-
-        <aside class="sidebar">
-            <h3>Forums</h3>
-            <ul>
-                <li>A/Ynov</li>
-                <li>A/Programmation</li>
-                <li>A/Gaming</li>
-                <li>A/News</li>
-            </ul>
-        </aside>
-
-        <main class="feed">
-            
-            {{if .IsLoggedIn}}
-                {{if .RecentCategories}}
-                <div class="recent-categories">
-                    <h3>Récemment visitées</h3>
-                    <ul>
-                        {{range .RecentCategories}}
-                        <li>
-                            <a href="/category?id={{.CategorieID}}">
-                                {{.Name}}
-                            </a>
-                        </li>
-                        {{end}}
-                    </ul>
-                </div>
-                {{end}}
-            {{end}}
-
-            <article class="post">
-                <div class="votes">
-                    ▲
-                    <span>124</span>
-                    ▼
-                </div>
-
-                <div class="post-content">
-                    <span class="community">A/Programmation</span>
-                    <h2>a</h2>
-                    <p>
-                       b
-                    </p>
-                    <div class="post-info">
-                        67 commentaires
-                    </div>
-                </div>
-            </article>
-
-            <article class="post">
-                <div class="votes">
-                    ▲
-                    <span>853</span>
-                    ▼
-                </div>
-
-                <div class="post-content">
-                    <span class="community">A/News</span>
-                    <h2>Combat en cage Remy/Jules</h2>
-                    <p>
-                        Un combat épique a eu lieu hier soir entre deux champions.
-                    </p>
-                    <div class="post-info">
-                        67 commentaires
-                    </div>
-                </div>
-            </article>
-
-            <article class="post">
-                <div class="votes">
-                    ▲
-                    <span>432</span>
-                    ▼
-                </div>
-
-                <div class="post-content">
-                    <span class="community">A/Gaming</span>
-                    <h2>p</h2>
-                    <p>
-                        Partagez vos réactions !
-                    </p>
-                    <div class="post-info">
-                        67 commentaires
-                    </div>
-                </div>
-         
-            </article>
-         <article class="post">
-                <div class="votes">
-                    ▲
-                    <span>432</span>
-                    ▼
-                </div>
-
-                <div class="post-content">
-                    <span class="community">A/Gaming</span>
-                    <h2>C</h2>
-                    <p>
-                        Partagez vos réactions !
-                    </p>
-                    <div class="post-info">
-                        67 commentaires
-                    </div>
-
-                </div>
-            </article>
-
-                     <article class="post">
-                <div class="votes">
-                    ▲
-                    <span>432</span>
-                    ▼
-                </div>
-
-                <div class="post-content">
-                    <span class="community">A/Ynov</span>
-                    <h2>Le retour de Germain DJE </h2>
-                    <p>
-                        Partagez vos réactions !
-                    </p>
-                    <div class="post-info">
-                        67 commentaires
-                    </div>
-
-                </div>
-            </article>
-        </main>
-
+        <a
+          href="/category?name={{.Name}}"
+          class="btn-view"
+          style="
+            background-color: #343536;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+          "
+          >Voir le flux</a
+        >
+      </div>
+      {{else}}
+      <p style="color: #818384">Aucune catégorie trouvée.</p>
+      {{end}}
     </div>
+  </main>
+</div>
 
-</body>
-</html>
+{{template "footer" .}}

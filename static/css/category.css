@@ -1,157 +1,75 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ==========================================================================
+   FIX DE DISPOSITION POUR LA PAGE CATEGORY 🚀
+   ========================================================================== */
+
+/* 1. Force le conteneur principal à s'aligner en colonnes */
+body .container {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  gap: 30px !important;
+  max-width: 1200px !important;
+  margin: 100px auto 0 auto !important; /* Donne de l'air sous le header fixe */
+  padding: 0 20px !important;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    color: #fffdfd;
-    background: #0e082c;
+/* 2. Donne un vrai look de sidebar Reddit/Agora au bloc Forums */
+body .left-sidebar,
+body .sidebar {
+  width: 280px !important;
+  min-width: 280px !important;
+  background-color: #1a1a1b !important; /* Fond sombre identique aux cartes */
+  border: 1px solid #343536 !important;
+  border-radius: 4px !important;
+  padding: 16px !important;
 }
 
-.navbar {
-    position: sticky;
-    top: 0;
-    background: rgb(72, 69, 95);
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    border-bottom: 1px solid #ddd;
+/* Titre "Forums" */
+body .left-sidebar h3,
+body .sidebar h3 {
+  color: #787c7e !important;
+  font-size: 0.75rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  margin-bottom: 16px !important;
+  font-family: Arial, sans-serif !important;
 }
 
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    background: linear-gradient(135deg, #d433cc, #3c0166, #976017);
-    cursor: pointer;
+/* Liens des catégories */
+body .left-sidebar ul,
+body .sidebar ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
 }
 
-.search-box {
-    flex: 1;
-    margin: 0 20px;
+body .left-sidebar a,
+body .sidebar a {
+  color: #d7dadc !important;
+  text-decoration: none !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  display: block !important;
+  padding: 8px 12px !important;
+  border-radius: 4px !important;
+  transition: background-color 0.2s ease !important;
 }
 
-.search-box input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 20px;
-    border: 1px solid #030303;
+/* Effet de survol sur la liste */
+body .left-sidebar a:hover,
+body .sidebar a:hover {
+  background-color: #272729 !important;
 }
 
-.nav-buttons button {
-    padding: 8px 15px;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-    margin-left: 10px;
+/* 3. Positionne le feed de droite correctement */
+body .feed {
+  flex-grow: 1 !important;
+  max-width: 640px !important; /* Même largeur que l'index pour tes cartes */
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
 }
-
-
-.container {
-    display: flex;
-    max-width: 1400px;
-    margin: 20px auto;
-    gap: 20px;
-}
-
-
-.sidebar {
-    width: 250px;
-    background: rgb(61, 58, 85);
-    border-radius: 8px;
-    padding: 20px;
-    height: fit-content;
-}
-
-.sidebar h3 {
-    margin-bottom: 15px;
-}
-
-.sidebar ul {
-    list-style: none;
-}
-
-.sidebar li {
-    padding: 10px 0;
-    cursor: pointer;
-}
-
-.sidebar li:hover {
-    color: #ac7817;
-}
-
-
-.feed {
-    flex: 1;
-}
-
-
-.post {
-    background: rgb(40, 38, 56);
-    display: flex;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    overflow: hidden;
-}
-
-.votes {
-    width: 60px;
-     background: linear-gradient(135deg, #d433cc, #3c0166, #976017);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    gap: 5px;
-    font-weight: bold;
-    color: #f5e7e7;
-}
-
-.post-content {
-    padding: 15px;
-    flex: 1;
-}
-
-.community {
-    color: #fcfeff;
-    font-size: 13px;
-}
-
-.post-content h2 {
-    margin: 10px 0;
-    font-size: 22px;
-}
-
-.post-content p {
-    color: #ffffff;
-    line-height: 1.5;
-}
-
-.post-info {
-    margin-top: 15px;
-    color: #939596;
-    font-size: 14px;
-}
-
-    .container {
-        flex-direction: column;
-        padding: 0 10px;
-    }
-
-    .sidebar {
-        width: 100%;
-    }
-
-    .navbar {
-        flex-wrap: wrap;
-        height: auto;
-        padding: 10px;
-    }
-
-    .search-box {
-        width: 100%;
-        margin: 10px 0;
-    }
-

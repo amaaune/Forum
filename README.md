@@ -71,34 +71,21 @@ Projet de forum web développé en Go avec SQLite.
 
 ---
 
-## Convention CSS
+### 🎨 Gestion des Styles et Performance
 
-Chaque page HTML charge ses feuilles de style dans cet ordre :
+Chaque fichier HTML possède sa propre feuille de style dédiée (ex: `category.css`, `login.css`).
 
-```html
-<!-- 1. Base obligatoire -->
-<link rel="stylesheet" href="/static/css/base.css" />
-
-<!-- 2. Composants partagés utilisés sur cette page -->
-<link rel="stylesheet" href="/static/css/header.css" />
-<link rel="stylesheet" href="/static/css/footer.css" />
-<link rel="stylesheet" href="/static/css/modal.css" />
-<link rel="stylesheet" href="/static/css/buttons.css" />
-<link rel="stylesheet" href="/static/css/alerts.css" />
-
-<!-- 3. CSS spécifique à la page -->
-<link rel="stylesheet" href="/static/css/post.css" />
-```
+Cependant, pour éviter de surcharger les templates qui nécessitent de nombreux composants communs, nous avons **"polymérisé"** l'inclusion des fichiers transversaux. Au lieu de lister manuellement toutes les balises `<link>` (base, header, footer, modales, boutons), ces pages appellent uniquement un fichier centralisé : `style.css`. Ce dernier regroupe l'ensemble des modules partagés via des règles `@import`, simplifiant l'architecture et optimisant la mise en cache par le navigateur.
 
 ---
 
 ## Répartition de l'équipe
 
-| Personne | Rôle principal                  | Périmètre                                                                    |
-| -------- | ------------------------------- | ---------------------------------------------------------------------------- |
-| **P1**   | Référent Backend + Infra        | `database/`, `models/`, `handlers/`, `tests/`, Docker                        |
-| **P2**   | Référent Frontend + Intégration | `templates/`, `static/css/`, `static/js/`, `static/img/`, `handlers/auth.go` |
-| **P3**   | Spé Sécurité                    | `middleware/`, `security/`, `error.html`, `error.css`, revue globale         |
+| Personne   | Rôle principal                  | Périmètre                                                                    |
+| ---------- | ------------------------------- | ---------------------------------------------------------------------------- |
+| **Amaury** | Référent Backend + Infra        | `database/`, `models/`, `handlers/`, `tests/`                                |
+| **Gabor**  | Référent Frontend + Intégration | `templates/`, `static/css/`, `static/js/`, `static/img/`, `handlers/auth.go` |
+| **Kilian** | Spé Sécurité                    | `middleware/`, `security/`, `error.html`, `error.css`, revue globale         |
 
 ---
 
@@ -112,16 +99,20 @@ Chaque page HTML charge ses feuilles de style dans cet ordre :
 
 ---
 
-<!--
-## Lancer le projet
+## 🚀 Lancer le projet
 
-### En local
 ```bash
-go run main.go
+go run .
 ```
 
-### Avec Docker
-```bash
-docker build -t forum .
-docker run -p 8080:8080 forum
-``` -->
+---
+
+## 🧭 Accès direct aux interfaces spécifiques
+
+Saisissez manuellement ces URL dans votre navigateur pour visualiser et tester directement les différentes vues :
+
+```
+http://localhost:8080/category
+http://localhost:8080/login
+http://localhost:8080/register
+```
