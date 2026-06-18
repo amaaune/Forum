@@ -6,8 +6,6 @@ Projet de forum web développé en Go avec SQLite.
 
 ---
 
-## 📂 Architecture du Projet
-
 ```text
 .
 ├── main.go                  # Point d'entrée de l'application (initialisation et routage)
