@@ -1,0 +1,21 @@
+/* ==========================================================================
+   INTEGRATION DU FOOTER DANS LA SIDEBAR
+   ========================================================================== */
+
+.right-sidebar footer,
+aside footer {
+  margin-top: 24px;
+  padding: 0 8px;
+  background: transparent !important;
+  border: none !important;
+  text-align: left;
+}
+
+.right-sidebar footer p,
+aside footer p,
+.right-sidebar footer span {
+  color: #818384;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  margin: 0;
+}
