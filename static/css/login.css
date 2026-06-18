@@ -5,7 +5,7 @@
     font-family: Arial, sans-serif;
 }
 
-body {
+.login-body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -30,11 +30,11 @@ body {
     font-size: clamp(1.5rem, 5vw, 2rem);
 }
 
-.input-group {
+.login-input-group {
     margin-bottom: 20px;
 }
 
-.input-group label {
+.login-input-group label {
     display: block;
     margin-bottom: 8px;
     color: #555;
@@ -42,7 +42,7 @@ body {
     font-size: clamp(0.875rem, 2vw, 1rem);
 }
 
-.input-group input {
+.login-input-group input {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -65,7 +65,7 @@ body {
 }
 
 .login-btn:hover {
-     background-color: #0a0850;
+    background-color: #0a0850;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
@@ -74,7 +74,7 @@ body {
     transform: scale(0.98);
 }
 
-.google-btn {
+.login-google-btn {
     width: 100%;
     padding: 12px;
     background: white;
@@ -90,18 +90,18 @@ body {
     min-height: 44px;
 }
 
-.google-btn img {
+.login-google-btn img {
     width: 22px;
     height: 22px;
 }
 
-.google-btn:hover {
-  background-color: #0a0850;
+.login-google-btn:hover {
+    background-color: #0a0850;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.forgot-btn {
+.login-forgot-btn {
     width: 100%;
     padding: 12px;
     background: #1d0230;
@@ -115,17 +115,17 @@ body {
     min-height: 44px;
 }
 
-.forgot-btn:hover {
+.login-forgot-btn:hover {
     background-color: #0a0850;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.forgot-btn:active {
+.login-forgot-btn:active {
     transform: scale(0.98);
 }
 
-.a-btn {
+.login-a-btn {
     width: 100%;
     padding: 12px;
     background: #1d0230;
@@ -139,13 +139,13 @@ body {
     min-height: 44px;
 }
 
-.a-btn:hover {
+.login-a-btn:hover {
     background-color: #0a0850;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.home-btn {
+.login-home-btn {
     position: fixed;
     top: 20px;
     right: 20px;
@@ -164,13 +164,13 @@ body {
     z-index: 100;
 }
 
-.home-btn:hover {
+.login-home-btn:hover {
     background-color: #0a0850;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.button {
+.login-button {
     padding: 10px 20px;
     background-color: #1d0230;
     color: white;
@@ -190,13 +190,13 @@ body {
     justify-content: center;
 }
 
-.button:hover {
-  background-color: #0a0850;
+.login-button:hover {
+    background-color: #0a0850;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.leftbar {
+.login-leftbar {
     position: fixed;
     top: 20px;
     left: 20px;
@@ -207,8 +207,40 @@ body {
     font-size: 16px;
 }
 
+.login-back-btn {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    color: #555;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.login-back-btn:hover {
+    color: #1d0230;
+}
+
+.login-message-box {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.login-message-error {
+    background-color: #2c1a1a;
+    color: #FF7043;
+    border: 1px solid #FF7043;
+}
+
+.login-message-success {
+    background-color: #1a2c1a;
+    color: #4caf50;
+    border: 1px solid #4caf50;
+}
+
 @media (max-width: 480px) {
-    body {
+    .login-body {
         padding: 15px;
     }
 
@@ -222,38 +254,38 @@ body {
         font-size: 1.5rem;
     }
 
-    .input-group {
+    .login-input-group {
         margin-bottom: 16px;
     }
 
-    .input-group label {
+    .login-input-group label {
         font-size: 0.875rem;
         margin-bottom: 6px;
     }
 
-    .input-group input {
+    .login-input-group input {
         padding: 11px;
         font-size: 16px;
     }
 
     .login-btn,
-    .forgot-btn,
-    .a-btn,
-    .google-btn {
+    .login-forgot-btn,
+    .login-a-btn,
+    .login-google-btn {
         padding: 11px;
         font-size: 15px;
         margin-bottom: 12px;
         min-height: 44px;
     }
 
-    .button {
+    .login-button {
         padding: 8px 12px;
         font-size: 14px;
         top: 10px;
         left: 10px;
     }
 
-    .home-btn {
+    .login-home-btn {
         top: 10px;
         right: 10px;
         padding: 8px 12px;
@@ -262,7 +294,7 @@ body {
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
-    body {
+    .login-body {
         padding: 20px;
     }
 
@@ -276,38 +308,38 @@ body {
         font-size: 1.75rem;
     }
 
-    .input-group {
+    .login-input-group {
         margin-bottom: 18px;
     }
 
-    .input-group label {
+    .login-input-group label {
         font-size: 0.9rem;
         margin-bottom: 7px;
     }
 
-    .input-group input {
+    .login-input-group input {
         padding: 12px;
         font-size: 16px;
     }
 
     .login-btn,
-    .forgot-btn,
-    .a-btn,
-    .google-btn {
+    .login-forgot-btn,
+    .login-a-btn,
+    .login-google-btn {
         padding: 12px;
         font-size: 15px;
         margin-bottom: 13px;
         min-height: 44px;
     }
 
-    .button {
+    .login-button {
         padding: 9px 15px;
         font-size: 15px;
         top: 15px;
         left: 15px;
     }
 
-    .home-btn {
+    .login-home-btn {
         top: 15px;
         right: 15px;
         padding: 9px 14px;
@@ -316,7 +348,7 @@ body {
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-    body {
+    .login-body {
         padding: 25px;
     }
 
@@ -330,38 +362,38 @@ body {
         font-size: 1.9rem;
     }
 
-    .input-group {
+    .login-input-group {
         margin-bottom: 20px;
     }
 
-    .input-group label {
+    .login-input-group label {
         font-size: 0.95rem;
         margin-bottom: 8px;
     }
 
-    .input-group input {
+    .login-input-group input {
         padding: 12px;
         font-size: 16px;
     }
 
     .login-btn,
-    .forgot-btn,
-    .a-btn,
-    .google-btn {
+    .login-forgot-btn,
+    .login-a-btn,
+    .login-google-btn {
         padding: 12px;
         font-size: 16px;
         margin-bottom: 15px;
         min-height: 44px;
     }
 
-    .button {
+    .login-button {
         padding: 10px 18px;
         font-size: 16px;
         top: 18px;
         left: 18px;
     }
 
-    .home-btn {
+    .login-home-btn {
         top: 18px;
         right: 18px;
         padding: 10px 15px;
@@ -370,7 +402,7 @@ body {
 }
 
 @media (min-width: 1025px) {
-    body {
+    .login-body {
         padding: 20px;
     }
 
@@ -384,38 +416,38 @@ body {
         font-size: 2rem;
     }
 
-    .input-group {
+    .login-input-group {
         margin-bottom: 20px;
     }
 
-    .input-group label {
+    .login-input-group label {
         font-size: 1rem;
         margin-bottom: 8px;
     }
 
-    .input-group input {
+    .login-input-group input {
         padding: 12px;
         font-size: 16px;
     }
 
     .login-btn,
-    .forgot-btn,
-    .a-btn,
-    .google-btn {
+    .login-forgot-btn,
+    .login-a-btn,
+    .login-google-btn {
         padding: 12px;
         font-size: 16px;
         margin-bottom: 15px;
         min-height: 44px;
     }
 
-    .button {
+    .login-button {
         padding: 10px 20px;
         font-size: 16px;
         top: 20px;
         left: 20px;
     }
 
-    .home-btn {
+    .login-home-btn {
         top: 20px;
         right: 20px;
         padding: 10px 15px;
@@ -424,7 +456,7 @@ body {
 }
 
 @media (max-height: 600px) and (orientation: landscape) {
-    body {
+    .login-body {
         min-height: auto;
         padding: 10px;
     }
@@ -439,34 +471,26 @@ body {
         font-size: 1.3rem;
     }
 
-    .input-group {
+    .login-input-group {
         margin-bottom: 12px;
     }
 
-    .input-group input {
+    .login-input-group input {
         padding: 8px;
     }
 
     .login-btn,
-    .forgot-btn,
-    .a-btn,
-    .google-btn {
+    .login-forgot-btn,
+    .login-a-btn,
+    .login-google-btn {
         padding: 8px;
         margin-bottom: 8px;
         min-height: 38px;
     }
 
-    .button,
-    .home-btn {
+    .login-button,
+    .login-home-btn {
         padding: 6px 10px;
         font-size: 12px;
     }
 }
-
-
-
-
-
-
-
-

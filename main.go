@@ -18,7 +18,7 @@ func renderTemplate(w http.ResponseWriter, tmpl string, data any) {
 		return
 	}
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	if err := t.Execute(w, data); err != nil {
+	if err := t.Execute(w, nil); err != nil {
 		http.Error(w, "Erreur execution template: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
