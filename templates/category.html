@@ -35,8 +35,26 @@
             </ul>
         </aside>
 
-        <main class="feed" id="feedContainer">
-            <article class="post" data-post-id="1">
+        <main class="feed">
+            
+            {{if .IsLoggedIn}}
+                {{if .RecentCategories}}
+                <div class="recent-categories">
+                    <h3>Récemment visitées</h3>
+                    <ul>
+                        {{range .RecentCategories}}
+                        <li>
+                            <a href="/category?id={{.CategorieID}}">
+                                {{.Name}}
+                            </a>
+                        </li>
+                        {{end}}
+                    </ul>
+                </div>
+                {{end}}
+            {{end}}
+
+            <article class="post">
                 <div class="votes">
                     <span class="vote-up" role="button" aria-label="Upvote">▲</span>
                     <span class="vote-count">124</span>
