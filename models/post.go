@@ -33,6 +33,5 @@ func (p Post) TimeAgo() string {
 		return fmt.Sprintf("il y a %d j", days)
 	}
 
-	// Si ça fait plus d'une semaine, format propre : JJ/MM/AAAA
 	return p.CreatedAt.Format("02/01/2006")
 }

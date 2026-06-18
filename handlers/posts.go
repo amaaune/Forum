@@ -101,11 +101,9 @@ func CreatePostHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    // 1. Récupération des données du formulaire
     title := r.FormValue("title")
     content := r.FormValue("content")
     
-    // r.Form["categories"] récupère TOUTES les valeurs des checkboxes cochées qui ont name="categories"
     r.ParseForm()
     categoryStrings := r.Form["categories"]
     var categoryIDs []int
@@ -117,7 +115,6 @@ func CreatePostHandler(w http.ResponseWriter, r *http.Request) {
         }
     }
 
-    // 2. Récupération de l'user (En attendant l'étape 3 des sessions, on utilise notre userID 1 en dur)
     userID := 1 
 
     err := CreatePost(userID, title, content, categoryIDs)

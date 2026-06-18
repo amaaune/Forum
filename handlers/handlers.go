@@ -16,15 +16,14 @@ type IndexRenderData struct {
 }
 
 func IndexHandler(w http.ResponseWriter, r *http.Request, render func(http.ResponseWriter, string, any)) {
-	posts, err := GetPosts() // Ta fonction SQL existante
+	posts, err := GetPosts()
 	if err != nil {
 		http.Error(w, "Erreur de récupération des posts", http.StatusInternalServerError)
 		return
 	}
 
-	userID := 1 // ID temporaire de dev en attendant le système de session
+	userID := 1
 
-	// On boucle pour calculer le vrai score, le statut du vote ET charger les catégories de chaque post
 	for i := range posts {
 		posts[i].UserVote = ""
 
@@ -48,7 +47,6 @@ func IndexHandler(w http.ResponseWriter, r *http.Request, render func(http.Respo
 			}
 		}
 
-		// 🌟 NOUVEAU : Récupération et liaison des catégories pour CE post précis
 		catRows, errCat := database.DB.Query(`
 			SELECT c.categorie_id, c.name 
 			FROM categories c
@@ -64,7 +62,6 @@ func IndexHandler(w http.ResponseWriter, r *http.Request, render func(http.Respo
 				}
 			}
 			catRows.Close()
-			// On injecte le tableau de tags directement dans le post en cours
 			posts[i].Categories = postCategories
 		}
 	}
@@ -85,7 +82,6 @@ func IndexHandler(w http.ResponseWriter, r *http.Request, render func(http.Respo
 	render(w, "index.html", data)
 }
 
-// 2. LE SYSTEME DE VOTE (Intercepte les formulaires des logos A et V)
 func VoteHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Méthode non autorisée", http.StatusMethodNotAllowed)
@@ -101,7 +97,6 @@ func VoteHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// ID utilisateur temporaire en attendant ton système de session active
 	userID := 1 
 
 	if voteType == "up" {
@@ -137,7 +132,6 @@ func CreateCommentHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    // 1. Récupération des champs du formulaire
     postIDStr := r.FormValue("post_id")
     content := r.FormValue("content")
 
@@ -147,17 +141,14 @@ func CreateCommentHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    // 2. User temporaire (En attendant les sessions, on utilise l'user 1 de test)
     userID := 1
 
-    // 3. Insertion en DB avec ta fonction mise à jour
     err = CreateComment(postID, userID, content)
     if err != nil {
         http.Error(w, "Erreur lors de l'ajout du commentaire", http.StatusInternalServerError)
         return
     }
 
-    // 4. Redirection directe sur le post pour voir son commentaire apparaître !
     http.Redirect(w, r, "/post?id="+postIDStr, http.StatusSeeOther)
 }
 
@@ -167,7 +158,6 @@ type PostDetailData struct {
 }
 
 func SinglePostHandler(w http.ResponseWriter, r *http.Request, render func(http.ResponseWriter, string, any)) {
-	// 1. On récupère l'ID présent dans l'URL (ex: /post?id=3)
 	idStr := r.URL.Query().Get("id")
 	postID, err := strconv.Atoi(idStr)
 	if err != nil {
@@ -175,15 +165,12 @@ func SinglePostHandler(w http.ResponseWriter, r *http.Request, render func(http.
 		return
 	}
 
-	// 2. On appelle ta fonction GetPost pour charger le post
 	post, err := GetPost(postID)
 	if err != nil {
-		// Si le post n'existe pas en DB, on évite la page blanche : direction l'erreur
 		http.Redirect(w, r, "/error", http.StatusSeeOther)
 		return
 	}
 
-	// 3. On charge les catégories associées à ce post pour les badges
 	catRows, err := database.DB.Query(`
 		SELECT c.categorie_id, c.name 
 		FROM categories c
@@ -202,13 +189,11 @@ func SinglePostHandler(w http.ResponseWriter, r *http.Request, render func(http.
 		post.Categories = postCategories
 	}
 
-	// 4. On charge les commentaires liés avec ta fonction GetCommentsByPost
 	comments, err := GetCommentsByPost(postID)
 	if err != nil {
-		comments = []models.Comment{} // Tableau vide par sécurité si erreur
+		comments = []models.Comment{}
 	}
 
-	// 5. On assemble le tout et on l'envoie enfin au template !
 	data := PostDetailData{
 		Post:     post,
 		Comments: comments,
