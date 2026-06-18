@@ -18,13 +18,13 @@
       </ul>
     </nav>
     <section class="recent-section">
-        <div class="section-title">
-            <span>DERNIÈREMENT</span>
-            <i class="arrow-down"></i>
-        </div>
-        <ul>
-            <li><a href="/">r/Golang</a></li>
-        </ul>
+      <div class="section-title">
+        <span>DERNIÈREMENT</span>
+        <i class="arrow-down"></i>
+      </div>
+      <ul>
+        <li><a href="/">r/Golang</a></li>
+      </ul>
     </section>
 
     <section class="resources-section">
@@ -39,11 +39,15 @@
 
   <div class="feed-and-right-sidebar">
     <section class="feed-center">
-        <div class="create-post-bar">
-        <img src="/static/img/icons/icon.png" alt="User Avatar" class="user-avatar-mini">
-        
+      <div class="create-post-bar">
+        <img
+          src="/static/img/icons/icon.png"
+          alt="User Avatar"
+          class="user-avatar-mini"
+        />
+
         <a href="/post" class="create-input-link">Créer une publication</a>
-        
+
         <div class="create-post-actions">
           <a href="/post/create?type=image" title="Poster une image">
             <i class="icon-image">🖼️</i>
@@ -54,26 +58,36 @@
         </div>
       </div>
       <div class="posts-list">
-        {{range .}}
+        {{range .Posts}}
         <article class="post-card">
           <div class="post-voter">
-            <button class="arrow-up" title="Upvote">
-              <img
-                src="/static/img/icons/upvote.svg"
-                alt="Upvote"
-                class="vote-icon"
-              />
-            </button>
+            <form action="/post/vote" method="POST" class="vote-form">
+              <input type="hidden" name="post_id" value="{{.PostID}}" />
+              <input type="hidden" name="vote_type" value="up" />
+
+              <button type="submit" class="arrow-up {{if eq .UserVote "up"}}active{{end}}" title="Upvote">
+                <img
+                  src="/static/img/icons/upvote.svg"
+                  alt="Upvote"
+                  class="vote-icon"
+                />
+              </button>
+            </form>
 
             <span class="score">{{.Score}}</span>
 
-            <button class="arrow-down" title="Downvote">
-              <img
-                src="/static/img/icons/downvote.svg"
-                alt="Downvote"
-                class="vote-icon"
-              />
-            </button>
+            <form action="/post/vote" method="POST" class="vote-form">
+              <input type="hidden" name="post_id" value="{{.PostID}}" />
+              <input type="hidden" name="vote_type" value="down" />
+
+              <button type="submit" class="arrow-down {{if eq .UserVote "down"}}active{{end}}" title="Downvote">
+                <img
+                  src="/static/img/icons/downvote.svg"
+                  alt="Downvote"
+                  class="vote-icon"
+                />
+              </button>
+            </form>
           </div>
 
           <div class="post-main">
@@ -131,5 +145,9 @@
     </aside>
   </div>
 </main>
+
+{{template "modal" .}}
+
+<script src="/static/js/main.js"></script>
 
 {{template "footer" .}}

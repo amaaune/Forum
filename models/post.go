@@ -13,6 +13,7 @@ type Post struct {
 	CreatedAt  time.Time
 	Score      int
 	Categories []Category
+	UserVote string
 }
 
 func (p Post) TimeAgo() string {
