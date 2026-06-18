@@ -6,7 +6,7 @@ import (
 )
 
 func GetCommentsByPost(postID int) ([]models.Comment, error) {
-	rows, err := database.DB.Query("SELECT * FROM comments WHERE post_id = ?", postID)
+	rows, err := database.DB.Query("SELECT comment_id, post, user, content, created_at FROM comments WHERE post = ? ORDER BY created_at ASC", postID)
 	if err != nil {
 		return nil, err
 	}
@@ -25,7 +25,7 @@ func GetCommentsByPost(postID int) ([]models.Comment, error) {
 }
 
 func CreateComment(postID int, userID int, content string) error {
-	_, err := database.DB.Exec("INSERT INTO comments (post_id, user_id, content) VALUES (?, ?, ?)", postID, userID, content)
+	_, err := database.DB.Exec("INSERT INTO comments (post, user, content, created_at) VALUES (?, ?, ?, datetime('now'))", postID, userID, content)
 	return err
 }
 

@@ -1,47 +1,74 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Connexion Google</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>
+      {{if .Post.Title}}{{.Post.Title}}{{else}}Publication{{end}} - Agora
+    </title>
+    <link rel="stylesheet" href="/static/css/singlepost.css" />
+  </head>
+  <body>
+    {{template "header" .}}
 
-<link rel="stylesheet" href="../static/css/post.css">
-
-</head>
-<body>
-    <div class="page">
-        <p class="page-title">Créer un post</p>
-
-        <div class="post-card">
-            <h2>Titre du post</h2>
-            <form action="/post" method="post">
-                <input type="text" name="post_name" placeholder="Entrez le titre de votre post" required>
-                <button type="submit" class="btn btn-secondary">Enregistrer le titre</button>
-            </form>
+    <main class="single-post-container">
+      <article class="detailed-post-card">
+        <div class="post-meta">
+          <span>Posté par u/{{.Post.User}}</span>
         </div>
 
-        <div class="post-card">
-            <h2>Contenu</h2>
-            <form action="/post" method="post">
-                <textarea name="post_content" placeholder="Qu'avez-vous à dire ?" required></textarea>
-                <button type="submit" class="btn btn-secondary">Enregistrer le contenu</button>
-            </form>
+        <h1 class="post-title">{{.Post.Title}}</h1>
+
+        <div class="post-categories">
+          {{range .Post.Categories}}
+          <span class="category-badge">a/{{.Name}}</span>
+          {{end}}
         </div>
 
-        <div class="post-card">
-            <h2>Catégories</h2>
-            <form action="/post" method="post">
-                <input type="text" name="post_categories" placeholder="Séparées par des virgules — ex: Go, Sécurité, Web" required>
-                <button type="submit" class="btn btn-secondary">Ajouter les catégories</button>
-            </form>
-        </div>
+        <div class="post-body">{{.Post.Content}}</div>
+      </article>
 
-        <div class="divider"></div>
+      <section class="comments-section">
+        <h3 class="comments-title">
+          Commentaires ({{if .Comments}}{{len .Comments}}{{else}}0{{end}})
+        </h3>
 
-        <div class="publish-bar">
-            <span class="publish-hint">Vérifiez votre post avant de publier</span>
-            <button type="submit" class="btn btn-primary">Publier le post</button>
+        <form
+          action="/comment/create"
+          method="POST"
+          class="comment-submission-form"
+        >
+          <input type="hidden" name="post_id" value="{{.Post.PostID}}" />
+
+          <div class="form-group">
+            <textarea
+              name="content"
+              placeholder="Ajouter un commentaire constructif..."
+              rows="4"
+              required
+            ></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">Commenter</button>
+          </div>
+        </form>
+
+        <div class="comments-feed">
+          {{range .Comments}}
+          <div class="comment-card">
+            <div class="comment-meta">
+              <strong>u/{{.User}}</strong>
+            </div>
+            <div class="comment-content">{{.Content}}</div>
+          </div>
+          {{else}}
+          <p class="no-comments">
+            Aucun commentaire pour le moment. Lancez la discussion !
+          </p>
+          {{end}}
         </div>
-    </div>
-</body>
+      </section>
+    </main>
+
+    {{template "footer" .}}
+  </body>
 </html>

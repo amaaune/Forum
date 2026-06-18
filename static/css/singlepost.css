@@ -1,0 +1,125 @@
+/* Container Principal de la Page Unique */
+.single-post-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  color: #ffffff;
+}
+
+/* Carte Globale du Post */
+.detailed-post-card {
+  background-color: #1a1a1b;
+  border: 1px solid #343536;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.detailed-post-card .post-meta {
+  color: #818384;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+}
+
+.detailed-post-card .post-title {
+  font-size: 1.5rem;
+  margin: 0 0 12px 0;
+  font-weight: 600;
+}
+
+.detailed-post-card .post-categories {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.detailed-post-card .category-badge {
+  background: #272729;
+  border: 1px solid #343536;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.detailed-post-card .post-body {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #d7dede;
+  white-space: pre-wrap;
+}
+
+/* Section Commentaires */
+.comments-section {
+  background-color: #1a1a1b;
+  border: 1px solid #343536;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.comments-title {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #343536;
+  padding-bottom: 12px;
+}
+
+/* Formulaire des Commentaires */
+.comment-submission-form {
+  margin-bottom: 30px;
+}
+
+.comment-submission-form .form-group {
+  margin-bottom: 12px;
+}
+
+.comment-submission-form textarea {
+  width: 100%;
+  padding: 12px;
+  background-color: #272729;
+  border: 1px solid #343536;
+  border-radius: 4px;
+  color: #ffffff;
+  font-family: inherit;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.comment-submission-form .form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Cartes des Commentaires */
+.comments-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.comment-card {
+  background-color: #272729;
+  border: 1px solid #343536;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.comment-meta {
+  color: #818384;
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+}
+
+.comment-content {
+  color: #d7dede;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}
+
+.no-comments {
+  color: #818384;
+  text-align: center;
+  margin: 20px 0;
+  font-size: 0.95rem;
+}
