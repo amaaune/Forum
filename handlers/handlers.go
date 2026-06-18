@@ -107,3 +107,89 @@ func PostHandler(w http.ResponseWriter, r *http.Request, render func(http.Respon
 func ErrorHandler(w http.ResponseWriter, r *http.Request, render func(http.ResponseWriter, string, any)) {
 	render(w, "error.html", nil)
 }
+
+func CreateCommentHandler(w http.ResponseWriter, r *http.Request) {
+    if r.Method != http.MethodPost {
+        http.Error(w, "Méthode non autorisée", http.StatusMethodNotAllowed)
+        return
+    }
+
+    // 1. Récupération des champs du formulaire
+    postIDStr := r.FormValue("post_id")
+    content := r.FormValue("content")
+
+    postID, err := strconv.Atoi(postIDStr)
+    if err != nil || content == "" {
+        http.Redirect(w, r, "/", http.StatusSeeOther)
+        return
+    }
+
+    // 2. User temporaire (En attendant les sessions, on utilise l'user 1 de test)
+    userID := 1
+
+    // 3. Insertion en DB avec ta fonction mise à jour
+    err = CreateComment(postID, userID, content)
+    if err != nil {
+        http.Error(w, "Erreur lors de l'ajout du commentaire", http.StatusInternalServerError)
+        return
+    }
+
+    // 4. Redirection directe sur le post pour voir son commentaire apparaître !
+    http.Redirect(w, r, "/post?id="+postIDStr, http.StatusSeeOther)
+}
+
+type PostDetailData struct {
+	Post     models.Post
+	Comments []models.Comment
+}
+
+func SinglePostHandler(w http.ResponseWriter, r *http.Request, render func(http.ResponseWriter, string, any)) {
+	// 1. On récupère l'ID présent dans l'URL (ex: /post?id=3)
+	idStr := r.URL.Query().Get("id")
+	postID, err := strconv.Atoi(idStr)
+	if err != nil {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+		return
+	}
+
+	// 2. On appelle ta fonction GetPost pour charger le post
+	post, err := GetPost(postID)
+	if err != nil {
+		// Si le post n'existe pas en DB, on évite la page blanche : direction l'erreur
+		http.Redirect(w, r, "/error", http.StatusSeeOther)
+		return
+	}
+
+	// 3. On charge les catégories associées à ce post pour les badges
+	catRows, err := database.DB.Query(`
+		SELECT c.categorie_id, c.name 
+		FROM categories c
+		INNER JOIN post_categories pc ON c.categorie_id = pc.categorie_id
+		WHERE pc.post_id = ?`, post.PostID)
+	
+	if err == nil {
+		var postCategories []models.Category
+		for catRows.Next() {
+			var cat models.Category
+			if err := catRows.Scan(&cat.CategoryID, &cat.Name); err == nil {
+				postCategories = append(postCategories, cat)
+			}
+		}
+		catRows.Close()
+		post.Categories = postCategories
+	}
+
+	// 4. On charge les commentaires liés avec ta fonction GetCommentsByPost
+	comments, err := GetCommentsByPost(postID)
+	if err != nil {
+		comments = []models.Comment{} // Tableau vide par sécurité si erreur
+	}
+
+	// 5. On assemble le tout et on l'envoie enfin au template !
+	data := PostDetailData{
+		Post:     post,
+		Comments: comments,
+	}
+
+	render(w, "post.html", data)
+}

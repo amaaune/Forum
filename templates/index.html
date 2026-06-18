@@ -100,8 +100,12 @@
             </header>
 
             <div class="post-body">
-              <h2>{{.Title}}</h2>
-              <p>{{.Content}}</p>
+              <h2>
+              <a href="/post?id={{.PostID}}" class="post-title-link" style="color: inherit; text-decoration: none;">
+                {{.Title}}
+              </a>
+            </h2>
+            <p>{{.Content}}</p>
             </div>
 
             <footer class="post-actions">

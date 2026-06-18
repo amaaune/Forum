@@ -3,7 +3,6 @@ package main
 import (
 	"forum/database"
 	"forum/handlers"
-	"forum/middleware"
 	"html/template"
 	"log"
 	"net/http"
@@ -24,10 +23,10 @@ func renderTemplate(w http.ResponseWriter, tmpl string, data any) {
 	}
 }
 
-func logoutHandler(w http.ResponseWriter, r *http.Request) {
-	middleware.DeleteSession(w)
-	http.Redirect(w, r, "/login", http.StatusSeeOther)
-}
+// func logoutHandler(w http.ResponseWriter, r *http.Request) {
+// 	middleware.DeleteSession(w)
+// 	http.Redirect(w, r, "/login", http.StatusSeeOther)
+// }
 
 func main() {
 	// 1. Initialisation de la Forge (Base de données)
@@ -45,8 +44,10 @@ func main() {
 		handlers.IndexHandler(w, r, renderTemplate)
 	})
 	
-	http.HandleFunc("/login", handlers.LoginHandler)
-	
+	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+		renderTemplate(w, "login.html", nil)
+	})
+
 	http.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
 		renderTemplate(w, "register.html", nil)
 	})
@@ -56,14 +57,20 @@ func main() {
 	})
 
 	// 4. Routes Protégées par Middleware Auth
-	http.HandleFunc("/post", middleware.RequireAuth(func(w http.ResponseWriter, r *http.Request) {
-		handlers.PostHandler(w, r, renderTemplate)
-	}))
+	// http.HandleFunc("/post", middleware.RequireAuth(func(w http.ResponseWriter, r *http.Request) {
+	// 	handlers.PostHandler(w, r, renderTemplate)
+	// }))
+
+	http.HandleFunc("/post", func(w http.ResponseWriter, r *http.Request) {
+        handlers.SinglePostHandler(w, r, renderTemplate)
+    })
 
 	http.HandleFunc("/post/create", handlers.CreatePostHandler)
+
+	http.HandleFunc("/comment/create", handlers.CreateCommentHandler)
 	
-	http.HandleFunc("/category", middleware.RequireAuth(handlers.CategoryHandler))
-	http.HandleFunc("/logout", logoutHandler)
+	// http.HandleFunc("/category", middleware.RequireAuth(handlers.CategoryHandler))
+	// http.HandleFunc("/logout", logoutHandler)
 
 	// 5. La route magique pour intercepter le clic sur les logos A et V 🌟
 	http.HandleFunc("/post/vote", handlers.VoteHandler)

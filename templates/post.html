@@ -1,20 +1,74 @@
-<!-- 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détails Post</title>
-    <link rel="stylesheet" href="../static/css/post.css">
-</head>
-<body>
-    <div class="card">
-        <h1>Détail Post</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <title>
+      {{if .Post.Title}}{{.Post.Title}}{{else}}Publication{{end}} - Agora
+    </title>
+    <link rel="stylesheet" href="/static/css/singlepost.css" />
+  </head>
+  <body>
+    {{template "header" .}}
 
-        <button onclick="window.history.back()" class="button" aria-label="Retour">← </button>
-    <a href="index.html" class="home-btn" aria-label="Retour à l'accueil">Accueil</a>
-
+    <main class="single-post-container">
+      <article class="detailed-post-card">
+        <div class="post-meta">
+          <span>Posté par u/{{.Post.User}}</span>
         </div>
-    </div>
-</body>
-</html> -->
+
+        <h1 class="post-title">{{.Post.Title}}</h1>
+
+        <div class="post-categories">
+          {{range .Post.Categories}}
+          <span class="category-badge">a/{{.Name}}</span>
+          {{end}}
+        </div>
+
+        <div class="post-body">{{.Post.Content}}</div>
+      </article>
+
+      <section class="comments-section">
+        <h3 class="comments-title">
+          Commentaires ({{if .Comments}}{{len .Comments}}{{else}}0{{end}})
+        </h3>
+
+        <form
+          action="/comment/create"
+          method="POST"
+          class="comment-submission-form"
+        >
+          <input type="hidden" name="post_id" value="{{.Post.PostID}}" />
+
+          <div class="form-group">
+            <textarea
+              name="content"
+              placeholder="Ajouter un commentaire constructif..."
+              rows="4"
+              required
+            ></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">Commenter</button>
+          </div>
+        </form>
+
+        <div class="comments-feed">
+          {{range .Comments}}
+          <div class="comment-card">
+            <div class="comment-meta">
+              <strong>u/{{.User}}</strong>
+            </div>
+            <div class="comment-content">{{.Content}}</div>
+          </div>
+          {{else}}
+          <p class="no-comments">
+            Aucun commentaire pour le moment. Lancez la discussion !
+          </p>
+          {{end}}
+        </div>
+      </section>
+    </main>
+
+    {{template "footer" .}}
+  </body>
+</html>
