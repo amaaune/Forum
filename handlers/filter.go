@@ -126,34 +126,48 @@ func GetPostsByUserID(userID int) ([]models.Post, error) {
 }
 
 func GetLikedPostsByUserID(userID int) ([]models.Post, error) {
-	rows, err := database.DB.Query(`SELECT p.post_id, p.user, p.title, p.content, p.created_at
+	rows, err := database.DB.Query(`
+		SELECT DISTINCT
+			p.post_id,
+			p.user,
+			p.title,
+			p.content,
+			p.created_at
 		FROM posts p
-		INNER JOIN likes l ON p.post_id = l.post_id
-		WHERE l.user_id = ? AND l.value = 1`, userID)
+		INNER JOIN likes l
+			ON p.post_id = l.post
+		WHERE l.user = ?
+		AND l.count = 1
+	`, userID)
+
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 
 	var posts []models.Post
+
 	for rows.Next() {
-        var post models.Post
-        if err := rows.Scan(&post.PostID, &post.User, &post.Title, &post.Content, &post.CreatedAt); err != nil {
-            return nil, err
-        }
+		var post models.Post
 
-        score, _ := GetInteraction(post.PostID)
-        post.Score = score
+		if err := rows.Scan(
+			&post.PostID,
+			&post.User,
+			&post.Title,
+			&post.Content,
+			&post.CreatedAt,
+		); err != nil {
+			return nil, err
+		}
 
-        cats, _ := GetPostCategories(post.PostID)
-        post.Categories = cats
+		score, _ := GetInteraction(post.PostID)
+		post.Score = score
 
-        posts = append(posts, post)
-    }
+		cats, _ := GetPostCategories(post.PostID)
+		post.Categories = cats
 
-    if err = rows.Err(); err != nil {
-        return nil, err
-    }
+		posts = append(posts, post)
+	}
 
-    return posts, nil
+	return posts, rows.Err()
 }

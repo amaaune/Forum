@@ -39,14 +39,78 @@ func DislikesPost(postID int, userID int) error {
 }
 
 func LikesComment(commentID int, userID int) error {
-	_, _ = database.DB.Exec("DELETE FROM likes WHERE comment = ? AND user = ? AND post IS NULL", commentID, userID)
-	_, err := database.DB.Exec("INSERT INTO likes (count, post, user, comment) VALUES (1, NULL, ?, ?)", userID, commentID)
+
+	var currentCount int
+
+	err := database.DB.QueryRow(
+		`SELECT count
+		 FROM likes
+		 WHERE comment = ?
+		 AND user = ?
+		 AND post IS NULL`,
+		commentID,
+		userID,
+	).Scan(&currentCount)
+
+	_, _ = database.DB.Exec(
+		`DELETE FROM likes
+		 WHERE comment = ?
+		 AND user = ?
+		 AND post IS NULL`,
+		commentID,
+		userID,
+	)
+
+	if err == nil && currentCount == 1 {
+		return nil
+	}
+
+	_, err = database.DB.Exec(
+		`INSERT INTO likes
+		(count, post, user, comment)
+		VALUES (1, NULL, ?, ?)`,
+		userID,
+		commentID,
+	)
+
 	return err
 }
 
 func DislikesComment(commentID int, userID int) error {
-	_, _ = database.DB.Exec("DELETE FROM likes WHERE comment = ? AND user = ? AND post IS NULL", commentID, userID)
-	_, err := database.DB.Exec("INSERT INTO likes (count, post, user, comment) VALUES (-1, NULL, ?, ?)", userID, commentID)
+
+	var currentCount int
+
+	err := database.DB.QueryRow(
+		`SELECT count
+		 FROM likes
+		 WHERE comment = ?
+		 AND user = ?
+		 AND post IS NULL`,
+		commentID,
+		userID,
+	).Scan(&currentCount)
+
+	_, _ = database.DB.Exec(
+		`DELETE FROM likes
+		 WHERE comment = ?
+		 AND user = ?
+		 AND post IS NULL`,
+		commentID,
+		userID,
+	)
+
+	if err == nil && currentCount == -1 {
+		return nil
+	}
+
+	_, err = database.DB.Exec(
+		`INSERT INTO likes
+		(count, post, user, comment)
+		VALUES (-1, NULL, ?, ?)`,
+		userID,
+		commentID,
+	)
+
 	return err
 }
 

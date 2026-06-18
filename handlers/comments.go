@@ -3,6 +3,7 @@ package handlers
 import (
 	"forum/database"
 	"forum/models"
+	"errors"
 )
 
 func GetCommentsByPost(postID int) ([]models.Comment, error) {
@@ -24,8 +25,25 @@ func GetCommentsByPost(postID int) ([]models.Comment, error) {
 	return comments, nil
 }
 
-func CreateComment(postID int, userID int, content string) error {
-	_, err := database.DB.Exec("INSERT INTO comments (post, user, content, created_at) VALUES (?, ?, ?, datetime('now'))", postID, userID, content)
+func CreateComment(
+	postID int,
+	userID int,
+	content string,
+) error {
+
+	if content == "" {
+		return errors.New("commentaire vide")
+	}
+
+	_, err := database.DB.Exec(
+		`INSERT INTO comments
+		(post, user, content, created_at)
+		VALUES (?, ?, ?, datetime('now'))`,
+		postID,
+		userID,
+		content,
+	)
+
 	return err
 }
 
