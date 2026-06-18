@@ -11,9 +11,10 @@ import (
 type IndexRenderData struct {
 	Posts      []models.Post
 	Categories []models.Category
+	IsAuth     bool
+	Username   string
 }
 
-// 1. L'INDEX (La page d'accueil avec injection des scores calculés et statuts de vote)
 func IndexHandler(w http.ResponseWriter, r *http.Request, render func(http.ResponseWriter, string, any)) {
 	posts, err := GetPosts() // Ta fonction SQL existante
 	if err != nil {
@@ -23,7 +24,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request, render func(http.Respo
 
 	userID := 1 // ID temporaire de dev en attendant le système de session
 
-	// On boucle pour calculer le vrai score ET le statut du vote de l'utilisateur
+	// On boucle pour calculer le vrai score, le statut du vote ET charger les catégories de chaque post
 	for i := range posts {
 		posts[i].UserVote = ""
 
@@ -46,6 +47,26 @@ func IndexHandler(w http.ResponseWriter, r *http.Request, render func(http.Respo
 				posts[i].UserVote = "down"
 			}
 		}
+
+		// 🌟 NOUVEAU : Récupération et liaison des catégories pour CE post précis
+		catRows, errCat := database.DB.Query(`
+			SELECT c.categorie_id, c.name 
+			FROM categories c
+			INNER JOIN post_categories pc ON c.categorie_id = pc.categorie_id
+			WHERE pc.post_id = ?`, posts[i].PostID)
+		
+		if errCat == nil {
+			var postCategories []models.Category
+			for catRows.Next() {
+				var cat models.Category
+				if errCatScan := catRows.Scan(&cat.CategoryID, &cat.Name); errCatScan == nil {
+					postCategories = append(postCategories, cat)
+				}
+			}
+			catRows.Close()
+			// On injecte le tableau de tags directement dans le post en cours
+			posts[i].Categories = postCategories
+		}
 	}
 
 	categories, err := GetAllCategories()
@@ -57,6 +78,8 @@ func IndexHandler(w http.ResponseWriter, r *http.Request, render func(http.Respo
 	data := IndexRenderData{
 		Posts:      posts,
 		Categories: categories,
+		IsAuth:     true,
+		Username:   "AdminTest",  
 	}
 
 	render(w, "index.html", data)

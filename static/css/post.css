@@ -111,7 +111,7 @@ body {
 
 .btn-secondary:hover {
     background-color: #343437;
-    color: var(--luminous-coral);  /* coral au hover — cohérent avec ton global.css */
+    color: var(--luminous-coral);
 }
 
 .btn-primary {

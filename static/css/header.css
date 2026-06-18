@@ -1,4 +1,3 @@
-/* L'enveloppe globale */
 .main-header {
   background-color: var(--card-bg);
   border-bottom: 2px solid var(--sunset-blue);
@@ -8,10 +7,8 @@
 }
 
 .main-header {
-  /* On applique le dégradé sur tout le fond */
   background-image: linear-gradient(to right, #ff7043, #6a1b9a, #223c73);
 
-  /* On vire les anciennes propriétés de bordure transparente qui bloquaient */
   border-bottom: none;
   background-origin: padding-box;
   background-clip: border-box;
@@ -21,34 +18,20 @@
   z-index: 1000;
 }
 
-/* C'est ici que la magie opère */
-/* .navbar {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    padding: 0 20px;
-    height: 60px;
-    max-width: 1200px; 
-    margin: 0 auto;
-} */
-
 .navbar {
   display: flex;
-  justify-content: space-between; /* Logo à gauche, Liens au centre, Login à droite */
+  justify-content: space-between;
   align-items: center;
   height: 60px;
 
-  /* 🌟 ON FAIT SAUTER LE CARCAN DES 1200px ICI 🌟 */
   width: 100%;
   max-width: none;
   margin: 0;
 
-  /* Un bon padding pour donner de l'air aux extrémités */
   padding: 0 40px;
   box-sizing: border-box;
 }
 
-/* Aligner le logo et le texte "gora" */
 .logo a {
   display: flex;
   align-items: center;
@@ -56,7 +39,6 @@
   font-size: 1.2rem;
 }
 
-/* Mettre les liens (Accueil) à l'horizontale */
 .nav-links {
   display: flex;
   list-style: none;
@@ -64,7 +46,6 @@
   padding: 0;
 }
 
-/* Style du bouton de connexion façon "Charte Agora" */
 .btn-login {
   background-color: var(--luminous-coral);
   color: white !important;
@@ -73,26 +54,19 @@
   font-weight: bold;
 }
 
-/* Conteneur du formulaire qui prend l'espace disponible au centre */
 .search-bar-form {
   flex: 1;
-  max-width: 600px; /* Évite qu'elle devienne trop immense sur les écrans géants */
-  margin: 0 20px; /* Donne de l'air par rapport au logo et au bouton connexion */
+  max-width: 600px;
+  margin: 0 20px;
 }
 
-/* La boîte de saisie style Agora Dark */
 .search-input-container {
   display: flex;
   align-items: center;
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.1
-  ); /* Fond clair transparent pour réagir sur le dégradé */
-  backdrop-filter: blur(4px); /* Léger effet de flou premium en fond */
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px; /* Forme pilule comme le reste du site */
+  border-radius: 20px;
   padding: 6px 14px;
   transition:
     background-color 0.2s,
@@ -100,7 +74,6 @@
     box-shadow 0.2s;
 }
 
-/* Icône loupe discrète */
 .search-icon {
   color: var(--text-gray);
   font-size: 0.9rem;
@@ -108,7 +81,6 @@
   user-select: none;
 }
 
-/* Le champ de texte brut débarrassé des styles système */
 .search-input-container input {
   background: none;
   border: none;
@@ -119,14 +91,43 @@
   font-family: inherit;
 }
 
-/* Placeholder un peu plus discret */
 .search-input-container input::placeholder {
   color: rgba(215, 218, 220, 0.6);
 }
 
-/* Effet interactif quand l'utilisateur clique dedans */
 .search-input-container:focus-within {
   background-color: rgba(255, 255, 255, 0.15);
   border-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.05);
+}
+
+.user-logged-menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-logged-menu .username {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.user-logged-menu .btn-logout {
+  background-color: #8141b6;
+  border: 1px solid #474748;
+  padding: 6px 16px;
+  border-radius: 20px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.user-logged-menu .btn-logout:hover {
+  background-color: #474748;
+  border-color: #575758;
 }

@@ -36,7 +36,14 @@
         </form>
 
         <div class="user-menu">
+          {{if .IsAuth}}
+          <div class="user-logged-menu">
+            <span class="username">u/{{.Username}}</span>
+            <a href="/logout" class="btn-logout">Déconnexion</a>
+          </div>
+          {{else}}
           <a href="/login" class="btn-login">Connexion</a>
+          {{end}}
         </div>
       </nav>
     </header>
