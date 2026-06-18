@@ -45,7 +45,9 @@ func main() {
 		handlers.IndexHandler(w, r, renderTemplate)
 	})
 	
-	http.HandleFunc("/login", handlers.LoginHandler)
+	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+		renderTemplate(w, "login.html", nil)
+	})
 	
 	http.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
 		renderTemplate(w, "register.html", nil)
