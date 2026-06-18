@@ -1,173 +1,145 @@
- body {
-            font-family: Arial, sans-serif;
-            max-width: 700px;
-            margin: 40px auto;
-            padding: 20px;
-       background: #0e082c;
-        }
+/* ==========================================================================
+   VARIABLES (Charte Agora)
+   ========================================================================== */
+:root {
+    --sunset-blue: #223C73;
+    --twilight-purple: #6A1B9A;
+    --luminous-coral: #FF7043;
+    --bg-dark: #030303;
+    --card-bg: #1a1a1b;
+    --text-white: #d7dadc;
+    --text-gray: #818384;
+}
 
-        .card {
-            background: rgb(87, 85, 102);
-            color: #eee;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        h1 {
-            margin-top: 0;
-            color: #ffffff;
-        }
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
 
-        .field {
-            margin-bottom: 12px;
-        }
+.page {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 24px 16px;
+}
 
-        .label {
-            font-weight: bold;
-            color: #ffffff;
-        }
+.page-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-white);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #2d2d2e;
+}
 
-        .value {
-            color: #ffffff;
-        }
+.post-card {
+    background-color: var(--card-bg);
+    border: 1px solid #2d2d2e;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
 
-    
-.home-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 10px 15px;
-    background: linear-gradient(135deg, #aa7400, #490b61);
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-family: Arial, sans-serif;
+.post-card h2 {
     font-size: 14px;
-    transition: background 0.3s ease;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
+    font-weight: 500;
+    color: var(--text-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
 }
 
-.button {
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #aa7400, #490b61);
-    color: white;
+.post-card input[type="text"],
+.post-card textarea {
+    width: 100%;
+    background-color: #272729;
+    border: 1px solid #2d2d2e;
+    border-radius: 6px;
+    padding: 10px 14px;
+    color: var(--text-white);
+    font-size: 0.95rem;
+    font-family: inherit;
+    outline: none;
+    resize: none;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.post-card input[type="text"]:focus,
+.post-card textarea:focus {
+    border-color: var(--twilight-purple);  /* violet au focus */
+    background-color: #1f1f20;
+}
+
+.post-card input[type="text"]::placeholder,
+.post-card textarea::placeholder {
+    color: #555557;
+}
+
+.post-card textarea {
+    min-height: 120px;
+    line-height: 1.6;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 9px 18px;
+    border-radius: 20px;
     border: none;
-    border-radius: 500px;
+    font-size: 0.9rem;
+    font-weight: 500;
     cursor: pointer;
-    font-size: 16px;
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    transition: background 0.3s ease;
-    z-index: 100;
-    min-height: 44px;
-    min-width: 44px;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.btn-secondary {
+    background-color: #272729;
+    color: var(--text-white);
+}
+
+.btn-secondary:hover {
+    background-color: #343437;
+    color: var(--luminous-coral);  /* coral au hover — cohérent avec ton global.css */
+}
+
+.btn-primary {
+    background-color: var(--twilight-purple);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #7B1FA2;
+}
+
+.divider {
+    height: 1px;
+    background-color: #2d2d2e;
+    margin: 4px 0 16px;
+}
+
+.publish-bar {
+    background-color: var(--card-bg);
+    border: 1px solid #2d2d2e;
+    border-radius: 8px;
+    padding: 16px 20px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
-.button:hover {
-  background-color: #0a0850;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+.publish-hint {
+    font-size: 13px;
+    color: #555557;
 }
-
-
-@media (max-width: 480px) {
-    body {
-        padding: 15px;
-    }
-    .card {
-        padding: 15px;
-    }  
-    .button {
-        padding: 9px 15px;
-        font-size: 15px;
-        top: 15px;
-        left: 15px;
-    }
-
-    .home-btn {
-        top: 15px;
-        right: 15px;
-        padding: 9px 14px;
-        font-size: 13px;
-    }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-    body {
-        padding: 25px;
-    }
-
-    .card {
-        padding: 25px;
-    }
-
-    .button {
-        padding: 10px 18px;
-        font-size: 16px;
-        top: 18px;
-        left: 18px;
-    }
-
-    .home-btn {
-        top: 18px;
-        right: 18px;
-        padding: 10px 15px;
-        font-size: 14px;
-    }
-}
-
-@media (min-width: 1025px) {
-    body {
-        padding: 20px;
-    }
-
-    .card {
-        padding: 30px;
-    }
-    .button {
-        padding: 10px 20px;
-        font-size: 16px;
-        top: 20px;
-        left: 20px;
-    }
-
-    .home-btn {
-        top: 20px;
-        right: 20px;
-        padding: 10px 15px;
-        font-size: 14px;
-    }
-}
-
-@media (max-height: 600px) and (orientation: landscape) {
-    body {
-        min-height: auto;
-        padding: 10px;
-    }
-
-   .card {
-        padding: 15px;
-    }
-    .button,
-    .home-btn {
-        padding: 6px 10px;
-        font-size: 12px;
-    }
-}
-
-
-
-
-
-
-
-
