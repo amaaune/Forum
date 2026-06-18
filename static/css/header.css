@@ -1,58 +1,132 @@
 /* L'enveloppe globale */
 .main-header {
-    background-color: var(--card-bg);
-    border-bottom: 2px solid var(--sunset-blue);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+  background-color: var(--card-bg);
+  border-bottom: 2px solid var(--sunset-blue);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .main-header {
-    /* On applique le dégradé sur tout le fond */
-    background-image: linear-gradient(to right, #FF7043, #6A1B9A, #223C73);
-    
-    /* On vire les anciennes propriétés de bordure transparente qui bloquaient */
-    border-bottom: none;
-    background-origin: padding-box;
-    background-clip: border-box;
+  /* On applique le dégradé sur tout le fond */
+  background-image: linear-gradient(to right, #ff7043, #6a1b9a, #223c73);
 
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+  /* On vire les anciennes propriétés de bordure transparente qui bloquaient */
+  border-bottom: none;
+  background-origin: padding-box;
+  background-clip: border-box;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 /* C'est ici que la magie opère */
-.navbar {
+/* .navbar {
     display: flex;
-    justify-content: space-between; /* Logo à gauche, Liens au centre, Login à droite */
+    justify-content: space-between; 
     align-items: center;
     padding: 0 20px;
     height: 60px;
-    max-width: 1200px; /* Aligné avec ton agora-container */
+    max-width: 1200px; 
     margin: 0 auto;
+} */
+
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Logo à gauche, Liens au centre, Login à droite */
+  align-items: center;
+  height: 60px;
+
+  /* 🌟 ON FAIT SAUTER LE CARCAN DES 1200px ICI 🌟 */
+  width: 100%;
+  max-width: none;
+  margin: 0;
+
+  /* Un bon padding pour donner de l'air aux extrémités */
+  padding: 0 40px;
+  box-sizing: border-box;
 }
 
 /* Aligner le logo et le texte "gora" */
 .logo a {
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
 /* Mettre les liens (Accueil) à l'horizontale */
 .nav-links {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* Style du bouton de connexion façon "Charte Agora" */
 .btn-login {
-    background-color: var(--luminous-coral);
-    color: white !important;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-weight: bold;
+  background-color: var(--luminous-coral);
+  color: white !important;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+/* Conteneur du formulaire qui prend l'espace disponible au centre */
+.search-bar-form {
+  flex: 1;
+  max-width: 600px; /* Évite qu'elle devienne trop immense sur les écrans géants */
+  margin: 0 20px; /* Donne de l'air par rapport au logo et au bouton connexion */
+}
+
+/* La boîte de saisie style Agora Dark */
+.search-input-container {
+  display: flex;
+  align-items: center;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Fond clair transparent pour réagir sur le dégradé */
+  backdrop-filter: blur(4px); /* Léger effet de flou premium en fond */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px; /* Forme pilule comme le reste du site */
+  padding: 6px 14px;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+/* Icône loupe discrète */
+.search-icon {
+  color: var(--text-gray);
+  font-size: 0.9rem;
+  margin-right: 10px;
+  user-select: none;
+}
+
+/* Le champ de texte brut débarrassé des styles système */
+.search-input-container input {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  color: var(--text-white);
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+/* Placeholder un peu plus discret */
+.search-input-container input::placeholder {
+  color: rgba(215, 218, 220, 0.6);
+}
+
+/* Effet interactif quand l'utilisateur clique dedans */
+.search-input-container:focus-within {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.05);
 }
