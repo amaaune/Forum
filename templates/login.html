@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../static/css/login.css">
 </head>
 <body>
+<div class="login-body">
 
     <div class="login-container">
 
@@ -15,40 +16,38 @@
         </div>
 
         {{if .Error}}
-        <div class="message-box message-error">{{.Error}}</div>
+        <div class="login-message-box login-message-error">{{.Error}}</div>
         {{end}}
 
         {{if .Success}}
-        <div class="message-box message-success">{{.Success}}</div>
+        <div class="login-message-box login-message-success">{{.Success}}</div>
         {{end}}
 
-        <div id="messageBox" style="display:none;" class="message-box"></div>
+        <div id="messageBox" style="display:none;" class="login-message-box"></div>
 
         <form id="loginForm">
-            <div class="input-group">
+            <div class="login-input-group">
                 <label for="email">Adresse mail</label>
                 <input type="email" id="email" name="email" placeholder="Entrez votre email" required>
             </div>
 
-            <div class="input-group">
+            <div class="login-input-group">
                 <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
             </div>
 
-             <button onclick="LogAccount(document.getElementById('email').value, document.getElementById('password').value)" type="button" class="login-btn">
+            <button onclick="LogAccount(document.getElementById('email').value, document.getElementById('password').value)" type="button" class="login-btn">
                 Se connecter
             </button>
 
-            
             <p>Pas encore de compte ? </p>
             <button type="button" class="login-btn" onclick="window.location.href='/register'">S'inscrire</button>
         </form>
 
-        <a href="/" class="back-btn">← Retour à l'accueil</a>
+        <a href="/" class="login-back-btn">← Retour à l'accueil</a>
 
     </div>
 
- 
-
+</div>
 </body>
 </html>

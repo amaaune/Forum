@@ -5,7 +5,7 @@
     font-family: Arial, sans-serif;
 }
 
-body {
+.register-body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -14,7 +14,7 @@ body {
     padding: 20px;
 }
 
-.login-container {
+.register-container {
     background: white;
     padding: 40px;
     border-radius: 15px;
@@ -23,18 +23,18 @@ body {
     max-width: 460px;
 }
 
-.login-container h2 {
+.register-container h2 {
     text-align: center;
     margin-bottom: 25px;
     color: #333;
     font-size: clamp(1.5rem, 5vw, 2rem);
 }
 
-.input-group {
+.register-input-group {
     margin-bottom: 20px;
 }
 
-.input-group label {
+.register-input-group label {
     display: block;
     margin-bottom: 8px;
     color: #555;
@@ -42,7 +42,7 @@ body {
     font-size: clamp(0.875rem, 2vw, 1rem);
 }
 
-.input-group input {
+.register-input-group input {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -50,7 +50,7 @@ body {
     font-size: 16px;
 }
 
-.login-btn {
+.register-btn {
     width: 100%;
     padding: 12px;
     background: #1d0230;
@@ -64,17 +64,17 @@ body {
     min-height: 44px;
 }
 
-.login-btn:hover {
-     background-color: #0a0850;
+.register-btn:hover {
+    background-color: #0a0850;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.login-btn:active {
+.register-btn:active {
     transform: scale(0.98);
 }
 
-.google-btn {
+.register-google-btn {
     width: 100%;
     padding: 12px;
     background: white;
@@ -90,18 +90,18 @@ body {
     min-height: 44px;
 }
 
-.google-btn img {
+.register-google-btn img {
     width: 22px;
     height: 22px;
 }
 
-.google-btn:hover {
-  background-color: #0a0850;
+.register-google-btn:hover {
+    background-color: #0a0850;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.forgot-btn {
+.register-forgot-btn {
     width: 100%;
     padding: 12px;
     background: #1d0230;
@@ -113,19 +113,22 @@ body {
     margin-bottom: 15px;
     transition: background 0.3s ease;
     min-height: 44px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
 }
 
-.forgot-btn:hover {
+.register-forgot-btn:hover {
     background-color: #0a0850;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.forgot-btn:active {
+.register-forgot-btn:active {
     transform: scale(0.98);
 }
 
-.a-btn {
+.register-a-btn {
     width: 100%;
     padding: 12px;
     background: #1d0230;
@@ -139,13 +142,13 @@ body {
     min-height: 44px;
 }
 
-.a-btn:hover {
+.register-a-btn:hover {
     background-color: #0a0850;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.home-btn {
+.register-home-btn {
     position: fixed;
     top: 20px;
     right: 20px;
@@ -164,13 +167,13 @@ body {
     z-index: 100;
 }
 
-.home-btn:hover {
+.register-home-btn:hover {
     background-color: #0a0850;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.button {
+.register-button {
     padding: 10px 20px;
     background-color: #1d0230;
     color: white;
@@ -190,13 +193,13 @@ body {
     justify-content: center;
 }
 
-.button:hover {
-  background-color: #0a0850;
+.register-button:hover {
+    background-color: #0a0850;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.leftbar {
+.register-leftbar {
     position: fixed;
     top: 20px;
     left: 20px;
@@ -207,53 +210,72 @@ body {
     font-size: 16px;
 }
 
+.register-message-box {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.register-message-error {
+    background-color: #2c1a1a;
+    color: #FF7043;
+    border: 1px solid #FF7043;
+}
+
+.register-message-success {
+    background-color: #1a2c1a;
+    color: #4caf50;
+    border: 1px solid #4caf50;
+}
+
 @media (max-width: 480px) {
-    body {
+    .register-body {
         padding: 15px;
     }
 
-    .login-container {
+    .register-container {
         padding: 25px;
         border-radius: 12px;
     }
 
-    .login-container h2 {
+    .register-container h2 {
         margin-bottom: 20px;
         font-size: 1.5rem;
     }
 
-    .input-group {
+    .register-input-group {
         margin-bottom: 16px;
     }
 
-    .input-group label {
+    .register-input-group label {
         font-size: 0.875rem;
         margin-bottom: 6px;
     }
 
-    .input-group input {
+    .register-input-group input {
         padding: 11px;
         font-size: 16px;
     }
 
-    .login-btn,
-    .forgot-btn,
-    .a-btn,
-    .google-btn {
+    .register-btn,
+    .register-forgot-btn,
+    .register-a-btn,
+    .register-google-btn {
         padding: 11px;
         font-size: 15px;
         margin-bottom: 12px;
         min-height: 44px;
     }
 
-    .button {
+    .register-button {
         padding: 8px 12px;
         font-size: 14px;
         top: 10px;
         left: 10px;
     }
 
-    .home-btn {
+    .register-home-btn {
         top: 10px;
         right: 10px;
         padding: 8px 12px;
@@ -262,52 +284,52 @@ body {
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
-    body {
+    .register-body {
         padding: 20px;
     }
 
-    .login-container {
+    .register-container {
         padding: 35px;
         max-width: 100%;
     }
 
-    .login-container h2 {
+    .register-container h2 {
         margin-bottom: 22px;
         font-size: 1.75rem;
     }
 
-    .input-group {
+    .register-input-group {
         margin-bottom: 18px;
     }
 
-    .input-group label {
+    .register-input-group label {
         font-size: 0.9rem;
         margin-bottom: 7px;
     }
 
-    .input-group input {
+    .register-input-group input {
         padding: 12px;
         font-size: 16px;
     }
 
-    .login-btn,
-    .forgot-btn,
-    .a-btn,
-    .google-btn {
+    .register-btn,
+    .register-forgot-btn,
+    .register-a-btn,
+    .register-google-btn {
         padding: 12px;
         font-size: 15px;
         margin-bottom: 13px;
         min-height: 44px;
     }
 
-    .button {
+    .register-button {
         padding: 9px 15px;
         font-size: 15px;
         top: 15px;
         left: 15px;
     }
 
-    .home-btn {
+    .register-home-btn {
         top: 15px;
         right: 15px;
         padding: 9px 14px;
@@ -316,52 +338,52 @@ body {
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-    body {
+    .register-body {
         padding: 25px;
     }
 
-    .login-container {
+    .register-container {
         padding: 40px;
         max-width: 480px;
     }
 
-    .login-container h2 {
+    .register-container h2 {
         margin-bottom: 25px;
         font-size: 1.9rem;
     }
 
-    .input-group {
+    .register-input-group {
         margin-bottom: 20px;
     }
 
-    .input-group label {
+    .register-input-group label {
         font-size: 0.95rem;
         margin-bottom: 8px;
     }
 
-    .input-group input {
+    .register-input-group input {
         padding: 12px;
         font-size: 16px;
     }
 
-    .login-btn,
-    .forgot-btn,
-    .a-btn,
-    .google-btn {
+    .register-btn,
+    .register-forgot-btn,
+    .register-a-btn,
+    .register-google-btn {
         padding: 12px;
         font-size: 16px;
         margin-bottom: 15px;
         min-height: 44px;
     }
 
-    .button {
+    .register-button {
         padding: 10px 18px;
         font-size: 16px;
         top: 18px;
         left: 18px;
     }
 
-    .home-btn {
+    .register-home-btn {
         top: 18px;
         right: 18px;
         padding: 10px 15px;
@@ -370,52 +392,52 @@ body {
 }
 
 @media (min-width: 1025px) {
-    body {
+    .register-body {
         padding: 20px;
     }
 
-    .login-container {
+    .register-container {
         padding: 40px;
         max-width: 460px;
     }
 
-    .login-container h2 {
+    .register-container h2 {
         margin-bottom: 25px;
         font-size: 2rem;
     }
 
-    .input-group {
+    .register-input-group {
         margin-bottom: 20px;
     }
 
-    .input-group label {
+    .register-input-group label {
         font-size: 1rem;
         margin-bottom: 8px;
     }
 
-    .input-group input {
+    .register-input-group input {
         padding: 12px;
         font-size: 16px;
     }
 
-    .login-btn,
-    .forgot-btn,
-    .a-btn,
-    .google-btn {
+    .register-btn,
+    .register-forgot-btn,
+    .register-a-btn,
+    .register-google-btn {
         padding: 12px;
         font-size: 16px;
         margin-bottom: 15px;
         min-height: 44px;
     }
 
-    .button {
+    .register-button {
         padding: 10px 20px;
         font-size: 16px;
         top: 20px;
         left: 20px;
     }
 
-    .home-btn {
+    .register-home-btn {
         top: 20px;
         right: 20px;
         padding: 10px 15px;
@@ -424,43 +446,41 @@ body {
 }
 
 @media (max-height: 600px) and (orientation: landscape) {
-    body {
+    .register-body {
         min-height: auto;
         padding: 10px;
     }
 
-    .login-container {
+    .register-container {
         padding: 20px;
         border-radius: 10px;
     }
 
-    .login-container h2 {
+    .register-container h2 {
         margin-bottom: 12px;
         font-size: 1.3rem;
     }
 
-    .input-group {
+    .register-input-group {
         margin-bottom: 12px;
     }
 
-    .input-group input {
+    .register-input-group input {
         padding: 8px;
     }
 
-    .login-btn,
-    .forgot-btn,
-    .a-btn,
-    .google-btn {
+    .register-btn,
+    .register-forgot-btn,
+    .register-a-btn,
+    .register-google-btn {
         padding: 8px;
         margin-bottom: 8px;
         min-height: 38px;
     }
 
-    .button,
-    .home-btn {
+    .register-button,
+    .register-home-btn {
         padding: 6px 10px;
         font-size: 12px;
     }
 }
-
-
