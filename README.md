@@ -1,6 +1,6 @@
 # Forum
 
-# 📁 Forum — Arborescence du projet
+# 📁 Arborescence du projet
 
 Projet de forum web développé en Go avec SQLite.
 
