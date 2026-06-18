@@ -114,3 +114,17 @@ http://localhost:8080/category
 http://localhost:8080/login
 http://localhost:8080/register
 ```
+
+## 🛠️ Utilité et Jeux de Données
+
+Pour faciliter la revue d'évaluation et permettre une démonstration immédiate lors de la soutenance, la base de données locale (`forum.db`) est fournie pré-remplie avec un jeu de données (utilisateurs, posts, catégories).
+
+> 🔒 **Note de sécurité :** Dans le cadre d'un déploiement en production, cette base de données serait injectée totalement vierge de manière isolée.
+
+### 🧪 Vérification de l'initialisation automatique
+
+Si vous souhaitez vérifier le comportement initial de l'application et la création automatique des tables, vous pouvez supprimer le fichier de base de données à tout moment :
+
+```bash
+rm database/forum.db
+```
