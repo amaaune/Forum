@@ -1,7 +1,7 @@
 # Binaire compilé Go
 forum
 
-forum.db
+# forum.db
 
 go.mod
 go.sum
